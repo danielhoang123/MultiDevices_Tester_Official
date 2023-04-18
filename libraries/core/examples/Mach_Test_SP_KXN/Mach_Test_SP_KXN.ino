@@ -34,6 +34,8 @@
 #include "Controller_DS1307.h"
 #include "Controller_LSM303DLHC.h"
 #include "Controller_MS5611.h"
+#include "Controller_TCS34725.h"
+#include "Controller_TOF10120.h"
 
 void AddManagerContent_Device()
 {
@@ -68,7 +70,8 @@ void Add_I2C_Device()
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_DS1307);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_LSM303DLHC);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MS5611);
-
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_TCS34725);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_TOF10120);
 }
 
 // ---------------------------------------------------------------------------------------
