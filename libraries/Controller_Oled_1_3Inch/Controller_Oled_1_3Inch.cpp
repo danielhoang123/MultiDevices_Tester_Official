@@ -20,7 +20,7 @@ Controller_Oled_1_3Inch_Data::~Controller_Oled_1_3Inch_Data()
 bool Controller_Oled_1_3Inch_Data::getData()
 {
   // Add your code here
-  this->valueDevice = "Oled 1.3Inch is Running";
+  this->valueDevice = "";
   
   return true;
 }
@@ -29,25 +29,31 @@ bool Controller_Oled_1_3Inch_Data::init()
 {
   deInit();
 
-  this->quocOled = new Adafruit_SH1106(OLED_RESET);
-
-  this->quocOled->begin(SH1106_SWITCHCAPVCC, 0x3C);
-
-  this->quocOled->display();
-
-  delay(2000);
-  // Add your code here
+  U8GLIB_SH1106_128X64 u8g2(U8G_I2C_OPT_DEV_0 | U8G_I2C_OPT_NO_ACK | U8G_I2C_OPT_FAST);
   
+  u8g2.setFont(u8g_font_tpssb);
+  u8g2.setColorIndex(1);
+  //u8g.setDefaultBackgroundColor();
+  
+  u8g2.firstPage();
+  
+  do{
+   u8g2.drawBitmapP(0, 0, 128/8, 64, epd_bitmap_D___n_m_i2);
+  }while(u8g2.nextPage());
+  
+  delay(3000);
+  
+  u8g2.firstPage();
+  
+  do{
+   u8g2.drawBitmapP(0, 0, 128/8, 64, epd_bitmap_hshop_logo_new2);
+  }while(u8g2.nextPage());
+
   return 1;
 }
 
 bool Controller_Oled_1_3Inch_Data::deInit()
 {
-  if(this->quocOled != NULL)
-  {
-    free(this->quocOled);
-    this->quocOled = NULL;
-  }
 
   return 1;
 }

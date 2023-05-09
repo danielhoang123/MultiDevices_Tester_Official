@@ -15,8 +15,6 @@ class Controller_HMC588L_Data: public Model_I2C_Device{
   HMC5883L * mag;
   TwoWire * pWire1;
 
-  int16_t mx, my, mz;
-
   Controller_HMC588L_Data();
   ~Controller_HMC588L_Data();
   bool getData();

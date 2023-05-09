@@ -37,6 +37,7 @@ bool Controller_TCS34725_Data::getData()
   this->valueDevice += ";";
   this->valueDevice += "B";
   this->valueDevice += String(int(blue));
+  // this->valueDevice = "R: " + String(int(red)) + ";" + "G: " + String(int(green)) + ";" + "B: " + String(int(blue));
   return true;
 }
 

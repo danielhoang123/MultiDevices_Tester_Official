@@ -3,7 +3,7 @@
 
 Controller_Oled_0_91Inch_Data::Controller_Oled_0_91Inch_Data()
 {
-  this->nameDevice = "Oled 0.91Inch";
+  this->nameDevice = "Oled 0.91";
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x3C);
@@ -20,7 +20,7 @@ Controller_Oled_0_91Inch_Data::~Controller_Oled_0_91Inch_Data()
 bool Controller_Oled_0_91Inch_Data::getData()
 {
   // Add your code here
-  this->valueDevice = "Running!";
+  this->valueDevice = "";
   
   return true;
 }
@@ -29,13 +29,24 @@ bool Controller_Oled_0_91Inch_Data::init()
 {
   deInit();
   // Add your code here
-  this->quocOled091 = new Adafruit_SSD1306(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+  U8GLIB_SSD1306_128X32 u8g(U8G_I2C_OPT_DEV_0 | U8G_I2C_OPT_NO_ACK | U8G_I2C_OPT_FAST);
+  
+  u8g.setFont(u8g_font_tpssb);
+  u8g.setColorIndex(1);
+  
+  u8g.firstPage();
+  
+  do{
+   u8g.drawBitmapP(0, 0, 128/8, 64, epd_bitmap_D___n_m_i);
+  }while(u8g.nextPage());
 
-  this->quocOled091->begin(SSD1306_SWITCHCAPVCC, 0x3C);
-
-  this->quocOled091->display();
-
-  delay(2000);
+  delay(3000);
+  
+  u8g.firstPage();
+  
+  do{
+   u8g.drawBitmapP(0, 0, 128/8, 64, epd_bitmap_hshop_logo_new);
+  }while(u8g.nextPage());
 
   return 1;
 }

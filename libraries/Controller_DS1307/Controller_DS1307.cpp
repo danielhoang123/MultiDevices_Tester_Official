@@ -3,11 +3,11 @@
 
 Controller_DS1307_Data::Controller_DS1307_Data()
 {
-  this->nameDevice = "DS1307";
+  this->nameDevice = "RTC(DS1307, 3231..)";
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x68);
-  this->Add_HsCode(1518);
+  this->Add_HsCode(865);
   // Add your code here
 
 }
@@ -22,20 +22,13 @@ bool Controller_DS1307_Data::getData()
   // Add your code here
   this->valueDevice = "";
 
-  DateTime now = rtc.now();
+  // this->now = new DateTime; 
+  DateTime now = rtc1.now();
 
-  this->valueDevice += String(now.hour(), DEC);
-  this->valueDevice += ":";
-  this->valueDevice += String(now.minute(), DEC);
-  this->valueDevice += ":";
-  this->valueDevice += String(now.second(), DEC); 
-
-  // Serial.print(now.hour(), DEC);
-  // Serial.print(':');
-  // Serial.print(now.minute(), DEC);
-  // Serial.print(':');
-  // Serial.print(now.second(), DEC);
-  // Serial.println();
+  this->valueDevice = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year());
+  
+  this->valueDevice1 = "0" + String(now.hour(), DEC) + ":" + String(now.minute(), DEC) + ":" + String(now.second(), DEC);
+ 
   return true;
 }
 
@@ -43,7 +36,20 @@ bool Controller_DS1307_Data::init()
 {
   deInit();
   // Add your code here
-  rtc.begin();
+  RTC_DS1307 rtc1;
+  Wire.begin();
+  rtc1.begin();
+  DateTime now = rtc1.now();
+  int a = int(now.hour());
+  int b = int(now.minute());
+  int c = int(now.second());
+
+  if(a < 7 && b < 5){
+    rtc1.adjust(DateTime(2023, 4, 23, 7, 5, 0));
+  }
+  else{
+    return false;
+  }
 
   return 1;
 }

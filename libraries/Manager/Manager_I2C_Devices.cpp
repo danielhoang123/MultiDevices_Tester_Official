@@ -156,7 +156,7 @@ void Manager_I2C_Data::RunDeviceI2C_WithIndex(uint8_t index__)
         {
             Current_Millis = millis();
             Manager_I2C_Device.myI2C_Devices_List.get(index__)->getData();
-            ShowLCD(Manager_I2C_Device.myI2C_Devices_List.get(index__)->nameDevice, Manager_I2C_Device.myI2C_Devices_List.get(index__)->valueDevice);
+            ShowLCD(Manager_I2C_Device.myI2C_Devices_List.get(index__)->nameDevice, Manager_I2C_Device.myI2C_Devices_List.get(index__)->valueDevice, Manager_I2C_Device.myI2C_Devices_List.get(index__)->valueDevice1, Manager_I2C_Device.myI2C_Devices_List.get(index__)->valueDevice2);
         }
         buttonLoop();
     }
@@ -214,7 +214,7 @@ void Stop_DeviceI2C()
         String tempName = Manager_I2C_Device.myI2C_Devices_List.get(tempI2C_IndexDevice)->nameDevice;
         // uint8_t tempValue = Manager_I2C_Device.myI2C_Devices_List.get(tempI2C_IndexDevice)->i2cAddress;
         uint8_t tempValue = Manager_I2C_Device.indexI2CList.get(temI2cIndex).address;
-        ShowLCD(tempName, "0x" + String(tempValue, HEX));
+        ShowLCD(tempName, "0x" + String(tempValue, HEX), "", "");
     }
 }
 
@@ -244,7 +244,7 @@ void Next_DeviceI2C()
 
         String tempName = tempI2C_Device->nameDevice;
         uint8_t tempValue = Manager_I2C_Device.indexI2CList.get(temI2cIndex).address;
-        ShowLCD(tempName, "0x" + String(tempValue, HEX));
+        ShowLCD(tempName, "0x" + String(tempValue, HEX), "", "");
 
         debug_manager_I2C_deviceln(F("Next I2C Click "));
         debug_manager_I2C_deviceln(Manager_I2C_Device.currentI2C_DeviceIndex);
@@ -252,7 +252,7 @@ void Next_DeviceI2C()
         debug_manager_I2C_deviceln(tempValue);
         debug_manager_I2C_deviceln(tempName);
     }else{
-        ShowLCD(Manager_I2C_Device.nameDevice , Manager_I2C_Device.valueDevice);
+        ShowLCD(Manager_I2C_Device.nameDevice , Manager_I2C_Device.valueDevice, Manager_I2C_Device.valueDevice1, Manager_I2C_Device.valueDevice2);
     }
 }
 

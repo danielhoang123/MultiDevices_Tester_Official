@@ -9,10 +9,10 @@
 class Controller_SR04_Data: public Data_Adapter{
   public:
   // Add your declare here
+  
   hbq_SR04 sr04;
-
-  const int echo = 12                                           ;
-  const int trig = 13;
+  // const int echo = 12                                           ;
+  // const int trig = 13;
 
   Controller_SR04_Data();
   virtual ~Controller_SR04_Data(){};

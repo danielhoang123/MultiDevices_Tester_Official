@@ -4,7 +4,6 @@
 
 // include your Libraries here
 #include "RTClib.h" 
-
 class Controller_MKL_RTC_Quoc_Pointer_Data: public Model_I2C_Device{
   public:
   // Add your declare here

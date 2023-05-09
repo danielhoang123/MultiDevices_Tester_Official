@@ -23,7 +23,7 @@ bool Controller_AHT20_Data::getData()
   this->valueDevice = "";
 
   sensors_event_t humidity, temp;
-  aht.getEvent(&humidity, &temp);
+  this->a->getEvent(&humidity, &temp);
 
   this->valueDevice += String(temp.temperature);
   this->valueDevice += String(char(223));
@@ -38,8 +38,9 @@ bool Controller_AHT20_Data::getData()
 bool Controller_AHT20_Data::init()
 {
   deInit();
+  this->a = new Adafruit_AHTX0;
   // Add your code here
-  aht.begin();
+  this->a->begin();
 
   return 1;
 }
@@ -47,7 +48,10 @@ bool Controller_AHT20_Data::init()
 bool Controller_AHT20_Data::deInit()
 {
   // Add your code here
-
+  if(this->a != NULL){
+    free(this->a);
+    this->a = NULL;
+  }
   return 1;
 }
 

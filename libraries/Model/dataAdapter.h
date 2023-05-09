@@ -27,6 +27,8 @@ public:
   unsigned long timeInterval = 1000;
   String nameDevice;
   String valueDevice;
+  String valueDevice1;
+  String valueDevice2;
   bool isRun = false;
 
   uint16_t hsCode;

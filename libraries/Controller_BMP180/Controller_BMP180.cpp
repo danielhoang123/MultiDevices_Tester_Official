@@ -22,10 +22,10 @@ bool Controller_BMP180_Data::getData()
   // Add your code here
   this->valueDevice = "";
   //int x = int(this->bmp->readTemperature());
-  this->valueDevice += String(bmp.readTemperature(),2);
+  this->valueDevice += String(this->bmp->readTemperature(),2);
   this->valueDevice += String(char(223));
   this->valueDevice += "C";
-  this->valueDevice += String(bmp.readPressure());
+  this->valueDevice += String(this->bmp->readPressure());
   this->valueDevice += "Pa";
 
   return true;
@@ -36,8 +36,8 @@ bool Controller_BMP180_Data::init()
   deInit();
 
   // this->bmp = new Adafruit_BMP085();
-
-  bmp.begin();
+  this->bmp = new Adafruit_BMP085;
+  this->bmp->begin();
   // Add your code here
   
   return 1;
@@ -45,11 +45,12 @@ bool Controller_BMP180_Data::init()
 
 bool Controller_BMP180_Data::deInit()
 {
-  // if(this->bmp != NULL)
-  // {
-  //   free(this->bmp);
-  //   this->bmp = NULL;
-  // }
+
+  if(this->bmp != NULL)
+  {
+    free(this->bmp);
+    this->bmp = NULL;
+  }
 
   return 1;
 }

@@ -6,5 +6,5 @@
 
 extern LiquidCrystal_I2C lcd;
 extern void View_LCD_Text_Init();
-extern void ShowLCD(String nameDevice__, String valueDevice__);
+extern void ShowLCD(String nameDevice__, String valueDevice__, String valueDevice1__, String valueDevice2__);
 #endif

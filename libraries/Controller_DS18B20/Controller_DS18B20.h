@@ -10,7 +10,6 @@
 
 class Controller_DS18B20_Data: public Data_Adapter{
   public:
-  // Add your declare here
   // OneWire oneWire;
   // DallasTemperature sensor;
 

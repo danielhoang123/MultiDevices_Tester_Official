@@ -14,8 +14,7 @@ class Controller_MPU6050_Data: public Model_I2C_Device{
   // Add your declare here
   MPU6050 * accelgyro;
   TwoWire * pWire;
-  int16_t ax, ay, az;
-  int16_t gx, gy, gz;
+  
 
   bool blinkState = false;
 

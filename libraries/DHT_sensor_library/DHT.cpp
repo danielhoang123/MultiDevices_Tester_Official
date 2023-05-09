@@ -31,7 +31,7 @@
                    Not a timeout duration. Type: uint32_t. */
 
 /*!
- *  @brief  Instantiates a new DHT class
+ *  @brief  Instantiates a new DHT 0class
  *  @param  pin
  *          pin number that sensor is connected
  *  @param  type
@@ -283,12 +283,12 @@ bool DHT::read(bool force) {
     // First expect a low signal for ~80 microseconds followed by a high signal
     // for ~80 microseconds again.
     if (expectPulse(LOW) == TIMEOUT) {
-      DEBUG_PRINTLN(F("DHT timeout waiting for start signal low pulse."));
+      Serial.println(F("DHT timeout waiting for start signal low pulse."));
       _lastresult = false;
       return _lastresult;
     }
     if (expectPulse(HIGH) == TIMEOUT) {
-      DEBUG_PRINTLN(F("DHT timeout waiting for start signal high pulse."));
+      Serial.println(F("DHT timeout waiting for start signal high pulse."));
       _lastresult = false;
       return _lastresult;
     }
@@ -313,7 +313,7 @@ bool DHT::read(bool force) {
     uint32_t lowCycles = cycles[2 * i];
     uint32_t highCycles = cycles[2 * i + 1];
     if ((lowCycles == TIMEOUT) || (highCycles == TIMEOUT)) {
-      DEBUG_PRINTLN(F("DHT timeout waiting for pulse."));
+      Serial.println(F("DHT timeout waiting for pulse."));
       _lastresult = false;
       return _lastresult;
     }
@@ -328,7 +328,7 @@ bool DHT::read(bool force) {
     // stored data.
   }
 
-  DEBUG_PRINTLN(F("Received from DHT:"));
+  Serial.println(F("Received from DHT:"));
   DEBUG_PRINT(data[0], HEX);
   DEBUG_PRINT(F(", "));
   DEBUG_PRINT(data[1], HEX);
@@ -339,7 +339,7 @@ bool DHT::read(bool force) {
   DEBUG_PRINT(F(", "));
   DEBUG_PRINT(data[4], HEX);
   DEBUG_PRINT(F(" =? "));
-  DEBUG_PRINTLN((data[0] + data[1] + data[2] + data[3]) & 0xFF, HEX);
+  Serial.println((data[0] + data[1] + data[2] + data[3]) & 0xFF, HEX);
 
   // Check we read 40 bits and that the checksum matches.
   if (data[4] == ((data[0] + data[1] + data[2] + data[3]) & 0xFF)) {

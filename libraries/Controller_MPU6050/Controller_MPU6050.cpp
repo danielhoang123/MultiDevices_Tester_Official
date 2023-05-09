@@ -21,16 +21,16 @@ bool Controller_MPU6050_Data::getData()
 {
   // Add your code here
   this->valueDevice = "";
-
+  int16_t ax, ay, az;
+  int16_t gx, gy, gz;
   this->accelgyro->getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
 
   #ifdef OUTPUT_READABLE_ACCELGYRO
         // display tab-separated accel/gyro x/y/z values
-    this->valueDevice += String(ax);
-    this->valueDevice += ":";
-    this->valueDevice += String(ay);
-    this->valueDevice += ":";
-    this->valueDevice += String(az);
+    this->valueDevice = String(ax) + ":" + String(ay) + ":" + String(az);
+    this->valueDevice1 = String(gx) + ":" + String(gy) + ":" + String(gz);
+
+    
   #endif
 
   return true;

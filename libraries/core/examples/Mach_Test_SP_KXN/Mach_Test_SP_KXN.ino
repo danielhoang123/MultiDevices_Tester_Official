@@ -15,10 +15,10 @@
 
 // // Include I2C Device
 // #include "Controller_MKL_I2C_Motor.h"
-#include "Controller_MKL_RTC.h"
+// #include "Controller_MKL_RTC.h"
 // #include "Controller_Test_I2C_Snippet.h"
-#include "Controller_MKL_RTC_Quoc.h"
-#include "Controller_MKL_RTC_Quoc_Pointer.h"
+// #include "Controller_MKL_RTC_Quoc.h"
+// #include "Controller_MKL_RTC_Quoc_Pointer.h"
 #include "Controller_Oled_1_3Inch.h"
 #include "Controller_Oled_0_96Inch.h"
 #include "Controller_Oled_0_91Inch.h"
@@ -36,6 +36,10 @@
 #include "Controller_MS5611.h"
 #include "Controller_TCS34725.h"
 #include "Controller_TOF10120.h"
+#include "Controller_MPU9250.h"
+#include "Controller_MAX44009.h"
+#include "Controller_PCA9685.h"
+#include "Controller_VL53L0X.h"
 
 void AddManagerContent_Device()
 {
@@ -55,7 +59,7 @@ void Add_I2C_Device()
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Test_I2C_Snippet);
   //Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MKL_RTC_Quoc);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MPU6050);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MKL_RTC_Quoc_Pointer);
+  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MKL_RTC_Quoc_Pointer);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_1_3Inch);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_96Inch);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_91Inch);
@@ -72,6 +76,10 @@ void Add_I2C_Device()
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MS5611);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_TCS34725);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_TOF10120);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MPU9250);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MAX44009);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PCA9685);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_VL53L0X);
 }
 
 // ---------------------------------------------------------------------------------------

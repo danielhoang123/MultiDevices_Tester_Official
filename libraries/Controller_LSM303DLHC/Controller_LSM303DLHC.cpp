@@ -21,9 +21,9 @@ bool Controller_LSM303DLHC_Data::getData()
 {
   // Add your code here
   this->valueDevice = "";
-  cmps.read();
+  this->cmps->read();
   
-  float heading = cmps.heading();
+  float heading = this->cmps->heading();
 
   this->valueDevice += "Heading:";
   this->valueDevice += String(heading);
@@ -37,17 +37,21 @@ bool Controller_LSM303DLHC_Data::init()
   deInit();
   // Add your code here
   Wire.begin();
-  cmps.init();
-  cmps.enableDefault();
-  cmps.m_min = (LSM303::vector<int16_t>){-32767, -32767, -32767};
-  cmps.m_max = (LSM303::vector<int16_t>){+32767, +32767, +32767};
+  this->cmps = new LSM303;
+  this->cmps->init();
+  this->cmps->enableDefault();
+  this->cmps->m_min = (LSM303::vector<int16_t>){-32767, -32767, -32767};
+  this->cmps->m_max = (LSM303::vector<int16_t>){+32767, +32767, +32767};
   return 1;
 }
 
 bool Controller_LSM303DLHC_Data::deInit()
 {
   // Add your code here
-
+  if(this->cmps != NULL){
+    free(this->cmps);
+    this->cmps = NULL;
+  }
   return 1;
 }
 

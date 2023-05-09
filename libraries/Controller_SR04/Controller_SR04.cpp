@@ -25,17 +25,17 @@ bool Controller_SR04_Data::init()
 {
   deInit();
   // Add your code here
-  pinMode(trig, OUTPUT);
-  pinMode(echo, INPUT);
-
+  pinMode(13, OUTPUT);
+  pinMode(12, INPUT);
+  
   return 1;
 }
 
 bool Controller_SR04_Data::deInit()
 {
   // Add your code here
-  pinMode(trig, INPUT);
-  pinMode(echo, INPUT);
+  pinMode(13, INPUT);
+  pinMode(12, INPUT);
 
   return 1;
 }

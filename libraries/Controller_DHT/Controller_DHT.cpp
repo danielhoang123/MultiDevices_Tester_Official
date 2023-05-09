@@ -7,10 +7,12 @@ Dht_Data::Dht_Data()
     this->nameDevice = "DHT";
     this->timeInterval = 2000;
     this->valueDevice = "No device";
+    this->valueDevice1 = "";
 }
 
 bool Dht_Data::getData()
 {
+
     if (dht)
     {
         debug_DHT_ln(F("Start Read DHT"));
@@ -22,7 +24,8 @@ bool Dht_Data::getData()
         //     return true;
 
         String tempString = String(t) + "    " + String(h);
-        this->valueDevice = tempString;
+        this->valueDevice = String(t) + String(char(223)) + "C";
+        this->valueDevice1 = String(h) + "%";
         debug_DHT_ln(tempString);
     }
 

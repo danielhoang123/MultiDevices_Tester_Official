@@ -1,7 +1,7 @@
 #include "view_LCD_Text.h"
 #include "Manager_I2C_Devices.h"
 /* Cài đặt màn hình LCD */
-LiquidCrystal_I2C lcd(0x27, 16, 2); // Cài đặt địa chỉ 0x27, hiển thị 16 cột 2 dòng
+LiquidCrystal_I2C lcd(0x27, 20, 4); // Cài đặt địa chỉ 0x27, hiển thị 16 cột 2 dòng
 unsigned long curentTimeShowLCD = 0;
 void View_LCD_Text_Init()
 {
@@ -14,7 +14,7 @@ void View_LCD_Text_Init()
     lcd.print("Hello yours");
 }
 
-void ShowLCD(String nameDevice__, String valueDevice__)
+void ShowLCD(String nameDevice__, String valueDevice__, String valueDevice1__, String valueDevice2__)
 {
     if (millis() - curentTimeShowLCD >= 100)
     {
@@ -24,5 +24,9 @@ void ShowLCD(String nameDevice__, String valueDevice__)
         lcd.print(nameDevice__);
         lcd.setCursor(0, 1); // Cột 2 dòng 0
         lcd.print(valueDevice__);
+        lcd.setCursor(0, 2); // Cột 2 dòng 0
+        lcd.print(valueDevice1__);
+        lcd.setCursor(0, 3); // Cột 2 dòng 0
+        lcd.print(valueDevice2__);
     }
 }

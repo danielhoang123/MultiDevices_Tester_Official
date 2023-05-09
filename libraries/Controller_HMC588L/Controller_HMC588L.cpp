@@ -21,6 +21,7 @@ bool Controller_HMC588L_Data::getData()
 {
   // Add your code here
   this->valueDevice = "";
+  int16_t mx, my, mz;
 
   this->mag->getHeading(&mx, &my, &mz);
 
@@ -58,6 +59,18 @@ bool Controller_HMC588L_Data::init()
 bool Controller_HMC588L_Data::deInit()
 {
   // Add your code here
+  if(this->accelgyro1 != NULL){
+    free(this->accelgyro1);
+    this->accelgyro1 = NULL;
+  }
+  if(this->mag != NULL){
+    free(this->mag);
+    this->mag = NULL;
+  }
+  if(this->pWire1 != NULL){
+    free(this->pWire1);
+    this->pWire1 = NULL;
+  }
 
   return 1;
 }

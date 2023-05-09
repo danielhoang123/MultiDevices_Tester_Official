@@ -8,7 +8,7 @@
 class Controller_AHT20_Data: public Model_I2C_Device{
   public:
   // Add your declare here
-  Adafruit_AHTX0 aht;
+  Adafruit_AHTX0 * a;
 
   Controller_AHT20_Data();
   ~Controller_AHT20_Data();

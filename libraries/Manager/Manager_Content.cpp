@@ -43,6 +43,8 @@ bool Manager_Content::getData()
         lcd.print(this->my_Devices_List.get(tempCurrentIndex)->nameDevice);
         lcd.setCursor(2, 1); // Cột 2 dòng 0
         lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice);
+        lcd.setCursor(2, 2); // Cột 2 dòng 0
+        lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice1);
         this->timeInterval = this->my_Devices_List.get(tempCurrentIndex)->timeInterval;
     }
     return 1;

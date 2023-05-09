@@ -10,7 +10,7 @@
 class Controller_LSM303DLHC_Data: public Model_I2C_Device{
   public:
   // Add your declare here
-  LSM303 cmps;
+  LSM303 * cmps;
   
   Controller_LSM303DLHC_Data();
   ~Controller_LSM303DLHC_Data();

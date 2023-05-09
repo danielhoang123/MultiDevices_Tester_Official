@@ -27,11 +27,11 @@ bool Controller_MMA8452_Data::getData()
      // Cột 2 dòng 0
     // lcd.print(valueDevice__);
 
-    this->valueDevice += String(accel.getCalculatedX(), 2);
-    this->valueDevice += ":";
-    this->valueDevice += String(accel.getCalculatedY(), 2);
-    this->valueDevice += ":";
-    this->valueDevice += String(accel.getCalculatedZ(), 2);
+    this->valueDevice = String(accel.getCalculatedX(), 2) + ":" + String(accel.getCalculatedY(), 2) + ":" + String(accel.getCalculatedZ(), 2);
+    // this->valueDevice += ":";
+    // this->valueDevice += String(this->accel->getCalculatedY(), 2);
+    // this->valueDevice += ":";
+    // this->valueDevice += String(this->accel->getCalculatedZ(), 2);
 
     
   }
