@@ -6,8 +6,8 @@
 class hbq_SR04{
 
   public:
-  const int echo = 12;
-  const int trig = 13;
+  const int echo = 7;
+  const int trig = 6;
 
   double kalman(double U);
   void usonic_transmit();

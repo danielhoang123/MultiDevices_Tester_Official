@@ -24,7 +24,7 @@ bool Controller_LM35_Data::init()
 {
   deInit();
   // Add your code here
-  pinMode(A15, INPUT);
+  pinMode(A0, INPUT);
 
   return 1;
 }

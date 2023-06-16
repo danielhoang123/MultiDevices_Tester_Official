@@ -11,7 +11,8 @@
 #include "Controller_SR04.h"
 #include "Controller_LM35.h"
 #include "Controller_DS18B20.h"
-
+#include "Controller_NRF.h"
+#include "Controller_RC522.h"
 
 // // Include I2C Device
 // #include "Controller_MKL_I2C_Motor.h"
@@ -40,6 +41,13 @@
 #include "Controller_MAX44009.h"
 #include "Controller_PCA9685.h"
 #include "Controller_VL53L0X.h"
+#include "Controller_PAJ7620U2.h"
+#include "Controller_GY906.h"
+#include "Controller_HTU21.h"
+#include "Controller_HDC1080.h"
+
+unsigned long startMillis = 0;
+unsigned long startMillis1 = 0;
 
 void AddManagerContent_Device()
 {
@@ -49,7 +57,8 @@ void AddManagerContent_Device()
   manager_Content.my_Devices_List.add(&SR04_Device);
   manager_Content.my_Devices_List.add(&LM35_Device);
   manager_Content.my_Devices_List.add(&DS18B20_Device);
-
+  manager_Content.my_Devices_List.add(&NRF_Device);
+  manager_Content.my_Devices_List.add(&RC522_Device);
 }
 
 void Add_I2C_Device()
@@ -80,12 +89,18 @@ void Add_I2C_Device()
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MAX44009);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PCA9685);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_VL53L0X);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PAJ7620U2);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_GY906);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HTU21);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HDC1080);
+  
 }
 
 // ---------------------------------------------------------------------------------------
 void setup()
 {
   Serial.begin(9600);
+  pinMode(5, OUTPUT);
   buttonInit();
   debug("Start!");
   View_LCD_Text_Init();
@@ -93,10 +108,38 @@ void setup()
 }
 void loop()
 {
-  buttonLoop();
+  if(millis() - startMillis1 >= 50){
+    buttonLoop();
 
-  manager_Content.getData();
-  runSerialLife();
+    manager_Content.getData();
+    // runSerialLife();
+  }
+  
+
+  int acquiredValue = analogRead(A1);
+  int value = map(acquiredValue, 880, 1023, 0, 100);
+  
+  unsigned long currentMillis;
+  currentMillis = millis();
+  
+  //lcd.clear();                  // clear display
+  lcd.setCursor(15, 3);          // move cursor to   (3, 0)
+  lcd.print(value);             // print message at (3, 0)
+  lcd.print("%");
+
+  if(value <= 10 && value >= 0){
+    if(currentMillis - startMillis >= 2000){
+      digitalWrite(5, LOW);
+      startMillis = currentMillis;
+    }
+    else if(currentMillis - startMillis >= 1000){
+      digitalWrite(5, HIGH);
+//      startMillis = currentMillis;
+    }
+  }
+  else{
+    digitalWrite(5, LOW);
+  }
 }
 // ---------------------------------------------------------------------------------------
 

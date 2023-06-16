@@ -42,9 +42,9 @@
 
     // Button pin
 
-    #define BTN_NEXT_PIN A1
-    #define BTN_PREVIOUS_PIN A2 // 4
-    #define BTN_START_PIN A3    // 2
+    #define BTN_NEXT_PIN 2
+    #define BTN_PREVIOUS_PIN 3 // 4
+    #define BTN_START_PIN 4    // 2
 
     // #define BTN_NEXT_PIN        A3
     // #define BTN_PREVIOUS_PIN    A2 // 4

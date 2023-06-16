@@ -6,13 +6,11 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-#define ONE_WIRE_BUS 7
+#define ONE_WIRE_BUS 8
 
 class Controller_DS18B20_Data: public Data_Adapter{
   public:
-  // OneWire oneWire;
-  // DallasTemperature sensor;
-
+  
   Controller_DS18B20_Data();
   virtual ~Controller_DS18B20_Data(){};
   bool getData();

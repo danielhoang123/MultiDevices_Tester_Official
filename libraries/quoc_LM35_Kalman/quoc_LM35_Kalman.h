@@ -3,7 +3,7 @@
 class quoc_lm35{
   public:
 
-  const int sensorPin = A15;
+  const int sensorPin = A0;
   float getCalculated();
 
   private:

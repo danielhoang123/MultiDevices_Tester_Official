@@ -35,7 +35,7 @@ bool Dht_Data::getData()
 bool Dht_Data::reInit(uint8_t _type)
 {
     deInit();
-    dht = new (DHT)(9, _type);
+    dht = new (DHT)(8, _type);
     dht->begin();
     return 1;
 }
@@ -43,7 +43,7 @@ bool Dht_Data::reInit(uint8_t _type)
 bool Dht_Data::init()
 {
     deInit();
-    dht = new (DHT)(9, DHT11);
+    dht = new (DHT)(8, DHT11);
     this->nameDevice = "DHT11";
     dht->begin();
 
@@ -53,7 +53,7 @@ bool Dht_Data::init()
     {
         delay(200);
         deInit();
-        dht = new (DHT)(9, DHT22);
+        dht = new (DHT)(8, DHT22);
         this->nameDevice = "DHT2x";
     }
     this->isRun = true;

@@ -25,8 +25,8 @@ bool Controller_SR04_Data::init()
 {
   deInit();
   // Add your code here
-  pinMode(13, OUTPUT);
-  pinMode(12, INPUT);
+  pinMode(6, OUTPUT);
+  pinMode(7, INPUT);
   
   return 1;
 }
@@ -34,8 +34,8 @@ bool Controller_SR04_Data::init()
 bool Controller_SR04_Data::deInit()
 {
   // Add your code here
-  pinMode(13, INPUT);
-  pinMode(12, INPUT);
+  pinMode(6, INPUT);
+  pinMode(7, INPUT);
 
   return 1;
 }
