@@ -6,7 +6,7 @@ Controller_APDS9960_Data::Controller_APDS9960_Data()
   this->nameDevice = "APDS9960";
   this->timeInterval = 250;
   this->valueDevice = "No device";
-  this->Add_AddressList(0x68);
+  this->Add_AddressList(0x39);
   this->Add_HsCode(197);
   // Add your code here
 

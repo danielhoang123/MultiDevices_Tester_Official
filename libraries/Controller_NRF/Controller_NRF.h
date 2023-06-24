@@ -10,7 +10,6 @@ class Controller_nRF_Data : public Data_Adapter
 {
 public:
   // Add your declare here
-  
 
   Controller_nRF_Data();
   virtual ~Controller_nRF_Data(){};

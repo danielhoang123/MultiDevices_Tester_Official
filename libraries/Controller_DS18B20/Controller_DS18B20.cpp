@@ -26,7 +26,7 @@ bool Controller_DS18B20_Data::getData()
 bool Controller_DS18B20_Data::init()
 {
   deInit();
-  
+
   return 1;
 }
 
