@@ -50,6 +50,7 @@
 #include "Controller_HTU21.h"
 #include "Controller_HDC1080.h"
 #include "Controller_PN532.h"
+#include "Controller_GY_HMC588L.h"
 
 unsigned long startMillis = 0;
 unsigned long startMillis1 = 0;
@@ -109,6 +110,7 @@ void Add_I2C_Device()
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HDC1080);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_GY906);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PN532);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_GY_HMC588L);
 }
 
 // ---------------------------------------------------------------------------------------
