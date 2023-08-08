@@ -10,7 +10,7 @@ class Controller_nRF_Data : public Data_Adapter
 {
 public:
   // Add your declare here
-
+  RF24 radio;
   Controller_nRF_Data();
   virtual ~Controller_nRF_Data(){};
   bool getData();

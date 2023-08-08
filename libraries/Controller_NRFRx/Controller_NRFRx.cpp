@@ -6,10 +6,11 @@ RF24 radio1(9, 10);
 const byte address1[6] = "12345";
 bool led_mode = 0;
 boolean button_state1 = 0;
+
 Controller_NRFRx_Data::Controller_NRFRx_Data()
 {
-  this->nameDevice = "NRFRx";
-  this->timeInterval = 10;
+  this->nameDevice = "NRF Rx";
+  this->timeInterval = 100;
   this->valueDevice = "No device";
   // Add your code here
 }
@@ -75,6 +76,7 @@ bool Controller_NRFRx_Data::init()
 bool Controller_NRFRx_Data::deInit()
 {
   // Add your code here
+  this->valueDevice = "No Device";
   return 1;
 }
 

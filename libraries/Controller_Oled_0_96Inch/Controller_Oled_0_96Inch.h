@@ -142,7 +142,7 @@ const unsigned char epd_bitmap_D___n_m_i1 [] PROGMEM = {
 class Controller_Oled_0_96Inch_Data: public Model_I2C_Device{
   public:
   // Add your declare here
-  
+  bool mode;
   Controller_Oled_0_96Inch_Data();
   ~Controller_Oled_0_96Inch_Data();
   bool getData();

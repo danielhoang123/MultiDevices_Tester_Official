@@ -7,7 +7,10 @@ OneButton btn_previous(BTN_PREVIOUS_PIN, true);
 
 void buttonInit()
 {
-	// btn_start.setClickTicks(200);
+	btn_start.setClickTicks(300);
+	btn_next.setClickTicks(300);
+	btn_previous.setClickTicks(300);
+	
 	btn_next.attachClick(&Up_do_0_Click);
 	btn_start.attachClick(&Start_do_2_Click);
 	btn_start.attachDoubleClick(&Start_do_1_Click);

@@ -5,15 +5,17 @@
 #include "view_LCD_Text.h"
 
 // #include "Controller_Sieu_Am.h"
-#include "Controller_DHT.h"
 // #include "Controller_Test_Snippet.h"
 // #include <Controller/Controller_DHT.h>
+// #include "Controller_NRFRx.h"
+
+#include "Controller_DHT.h"
 #include "Controller_SR04.h"
 #include "Controller_LM35.h"
 #include "Controller_DS18B20.h"
 #include "Controller_NRF.h"
 #include "Controller_RC522.h"
-#include "Controller_NRFRx.h"
+#include "Controller_I2C_Scanner.h"
 
 // // Include I2C Device
 // #include "Controller_MKL_I2C_Motor.h"
@@ -21,6 +23,8 @@
 // #include "Controller_Test_I2C_Snippet.h"
 // #include "Controller_MKL_RTC_Quoc.h"
 // #include "Controller_MKL_RTC_Quoc_Pointer.h"
+// #include "Controller_PAJ7620U2.h"
+
 #include "Controller_Oled_1_3Inch.h"
 #include "Controller_Oled_0_96Inch.h"
 #include "Controller_Oled_0_91Inch.h"
@@ -42,7 +46,6 @@
 #include "Controller_MAX44009.h"
 #include "Controller_PCA9685.h"
 #include "Controller_VL53L0X.h"
-#include "Controller_PAJ7620U2.h"
 #include "Controller_GY906.h"
 #include "Controller_HTU21.h"
 #include "Controller_HDC1080.h"
@@ -59,15 +62,17 @@ bool flag1;
 
 void AddManagerContent_Device()
 {
+  // manager_Content.my_Devices_List.add(&sieuAm_Device);
+  // manager_Content.my_Devices_List.add(&NRFRx_Device);
+
   manager_Content.my_Devices_List.add(&Manager_I2C_Device);
   manager_Content.my_Devices_List.add(&Dht_Device);
-  // manager_Content.my_Devices_List.add(&sieuAm_Device);
   manager_Content.my_Devices_List.add(&SR04_Device);
   manager_Content.my_Devices_List.add(&LM35_Device);
   manager_Content.my_Devices_List.add(&DS18B20_Device);
-  manager_Content.my_Devices_List.add(&NRF_Device);
   manager_Content.my_Devices_List.add(&RC522_Device);
-  manager_Content.my_Devices_List.add(&NRFRx_Device);
+  manager_Content.my_Devices_List.add(&NRF_Device);
+  manager_Content.my_Devices_List.add(&I2C_Scanner_Device);
 }
 
 void Add_I2C_Device()
@@ -76,8 +81,9 @@ void Add_I2C_Device()
   // Manager_I2C_Device.myI2C_Devices_List.add(&RTC_Device);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Test_I2C_Snippet);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MKL_RTC_Quoc);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MPU6050);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MKL_RTC_Quoc_Pointer);
+  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PAJ7620U2);
+
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_1_3Inch);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_96Inch);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_91Inch);
@@ -98,10 +104,10 @@ void Add_I2C_Device()
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MAX44009);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PCA9685);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_VL53L0X);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PAJ7620U2);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_GY906);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MPU6050);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HTU21);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HDC1080);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_GY906);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PN532);
 }
 
@@ -117,6 +123,9 @@ void setup()
 }
 void loop()
 {
+  buttonLoop();
+  manager_Content.getData();
+  
   int acquiredValue = analogRead(A1);
 
   float temp_float = acquiredValue * 0.01;
@@ -184,19 +193,19 @@ void loop()
 
   int value = map(acquiredValue, 880, 1023, 0, 100);
 
-  if(acquiredValue >= 1015){
+  if (acquiredValue >= 1015)
+  {
     flag1 = 1;
   }
-  else{
+  else
+  {
     flag1 = 0;
   }
-  
+
   if (millis() - startMillis1 >= 100)
   {
-    buttonLoop();
-    manager_Content.getData();
     timer++;
-    startMillis1 = millis(); 
+    startMillis1 = millis();
     // runSerialLife();
   }
 
@@ -215,10 +224,10 @@ void loop()
   // else{
   //   digitalWrite(5, LOW);
   // }
-  
+
   if (timer >= 1200 && flag1 == 0)
   {
-    
+
     if (millis() - startMillis2 >= 1000)
     {
       digitalWrite(5, LOW);
@@ -234,8 +243,8 @@ void loop()
     digitalWrite(5, LOW);
   }
 
-  lcd.setCursor(0,3);
-  lcd.print(120-(timer/10));
+  lcd.setCursor(0, 3);
+  lcd.print(120 - (timer / 10));
   lcd.print("s");
 
   // if (value <= 10 && value >= 0)
