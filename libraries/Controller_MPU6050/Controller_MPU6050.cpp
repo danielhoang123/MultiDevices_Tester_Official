@@ -9,30 +9,25 @@ Controller_MPU6050_Data::Controller_MPU6050_Data()
   this->Add_AddressList(0x68);
   this->Add_HsCode(142);
   // Add your code here
-
 }
 
 Controller_MPU6050_Data::~Controller_MPU6050_Data()
 {
-  
 }
 
 bool Controller_MPU6050_Data::getData()
 {
   // Add your code here
+  sensors_event_t a, g, temp;
+  mpu.getEvent(&a, &g, &temp);
+
   this->valueDevice = "";
-  int16_t ax, ay, az;
-  int16_t gx, gy, gz;
-  this->accelgyro->getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
+  this->valueDevice1 = "";
+  this->valueDevice2 = "";
 
-  #ifdef OUTPUT_READABLE_ACCELGYRO
-        // display tab-separated accel/gyro x/y/z values
-    this->valueDevice = String(ax) + ":" + String(ay) + ":" + String(az);
-    this->valueDevice1 = String(gx) + ":" + String(gy) + ":" + String(gz);
-
-    
-  #endif
-
+  this->valueDevice += String(a.acceleration.x, 2) + ";" + String(a.acceleration.y, 2) + ";" + String(a.acceleration.z, 2);
+  this->valueDevice1 += String(g.gyro.x, 2) + ";" + String(g.gyro.y, 2) + ";" + String(g.gyro.z, 2);
+  this->valueDevice2 += String(temp.temperature, 2) + String(char(223)) + "C";
   return true;
 }
 
@@ -40,25 +35,13 @@ bool Controller_MPU6050_Data::init()
 {
   deInit();
   // Add your code here
-  this->accelgyro = new MPU6050();
-  this->pWire = new TwoWire();
+  mpu.begin();
 
-  this->pWire->begin();
-  this->pWire->beginTransmission(0x68);
-  
-  
+  mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
 
-  // #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
-  //       Wire.begin();
-  //   #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
-  //       Fastwire::setup(400, true);
-  //   #endif
+  mpu.setGyroRange(MPU6050_RANGE_500_DEG);
 
-  this->accelgyro->initialize();
-
-  this->accelgyro->setXGyroOffset(220);
-  this->accelgyro->setYGyroOffset(76);
-  this->accelgyro->setZGyroOffset(-85);
+  mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
 
   return 1;
 }
@@ -66,15 +49,7 @@ bool Controller_MPU6050_Data::init()
 bool Controller_MPU6050_Data::deInit()
 {
   // Add your code here
-  if(this->accelgyro != NULL){
-    free(this->accelgyro);
-    this->accelgyro = NULL;
-  }
 
-  if(this->pWire != NULL){
-    free(this->pWire);
-    this->pWire = NULL;
-  }
   return 1;
 }
 

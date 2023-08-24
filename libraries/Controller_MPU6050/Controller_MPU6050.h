@@ -3,22 +3,18 @@
 #include "Model_I2C_Device.h"
 
 // include your Libraries here
-#include "I2Cdev.h"
-#include "MPU6050.h"
-#include "Wire.h"
+#include <Adafruit_MPU6050.h>
+#include <Adafruit_Sensor.h>
+#include <Wire.h>
 
 #define OUTPUT_READABLE_ACCELGYRO
 
-class Controller_MPU6050_Data: public Model_I2C_Device{
-  public:
+class Controller_MPU6050_Data : public Model_I2C_Device
+{
+public:
   // Add your declare here
-  MPU6050 * accelgyro;
-  TwoWire * pWire;
-  
+  Adafruit_MPU6050 mpu;
 
-  bool blinkState = false;
-
-  
   Controller_MPU6050_Data();
   ~Controller_MPU6050_Data();
   bool getData();

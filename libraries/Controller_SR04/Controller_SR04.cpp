@@ -13,11 +13,8 @@ Controller_SR04_Data::Controller_SR04_Data()
 bool Controller_SR04_Data::getData()
 {
   // Add your code here
-  this->valueDevice = "";
   sr04.usonic_transmit();
-  this->valueDevice += String(sr04.forLoopFunction(), 2);
-  this->valueDevice += " (Cm)";
-  
+  this->valueDevice = String(sr04.forLoopFunction(), 1) + "(cm)";
   return true;
 }
 

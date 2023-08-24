@@ -20,8 +20,6 @@ Controller_Oled_1_3Inch_Data::~Controller_Oled_1_3Inch_Data()
 bool Controller_Oled_1_3Inch_Data::getData()
 {
   // Add your code here
-  this->valueDevice = "";
-  
   return true;
 }
 

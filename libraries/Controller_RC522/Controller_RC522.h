@@ -6,10 +6,11 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-class Controller_RC522_Data: public Data_Adapter{
-  public:
+class Controller_RC522_Data : public Data_Adapter
+{
+public:
   // Add your declare here
-
+  
   Controller_RC522_Data();
   virtual ~Controller_RC522_Data(){};
   bool getData();

@@ -42,7 +42,7 @@
 #include "Controller_MS5611.h"
 #include "Controller_TCS34725.h"
 #include "Controller_TOF10120.h"
-#include "Controller_MPU9250.h"
+// #include "Controller_MPU9250.h"
 #include "Controller_MAX44009.h"
 #include "Controller_PCA9685.h"
 #include "Controller_VL53L0X.h"
@@ -101,7 +101,7 @@ void Add_I2C_Device()
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MS5611);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_TCS34725);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_TOF10120);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MPU9250);
+  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MPU9250);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MAX44009);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PCA9685);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_VL53L0X);
@@ -116,7 +116,6 @@ void Add_I2C_Device()
 // ---------------------------------------------------------------------------------------
 void setup()
 {
-  Serial.begin(9600);
   pinMode(5, OUTPUT);
   buttonInit();
   // debug("Start!");
@@ -127,63 +126,54 @@ void loop()
 {
   buttonLoop();
   manager_Content.getData();
-  
+
   int acquiredValue = analogRead(A1);
 
   float temp_float = acquiredValue * 0.01;
 
   if (temp_float >= 10.03 && temp_float < 10.15)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("90%");
   }
   else if (temp_float >= 9.89 && temp_float < 10.01)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("80%");
   }
 
   else if (temp_float >= 9.75 && temp_float < 9.87)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("70%");
   }
   else if (temp_float >= 9.61 && temp_float < 9.73)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("60%");
   }
   else if (temp_float >= 9.47 && temp_float < 9.59)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("50%");
   }
   else if (temp_float >= 9.33 && temp_float < 9.45)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("40%");
   }
   else if (temp_float >= 9.19 && temp_float < 9.31)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("30%");
   }
   else if (temp_float >= 9.05 && temp_float < 9.17)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("20%");
   }
   else if (temp_float >= 8.91 && temp_float < 9.03)
   {
-    // lcd.clear();
     lcd.setCursor(15, 3);
     lcd.print("10%");
   }
@@ -208,24 +198,7 @@ void loop()
   {
     timer++;
     startMillis1 = millis();
-    // runSerialLife();
   }
-
-  // if(timer == 50){
-  //   digitalWrite(5, HIGH);
-  // }
-  // else if (timer == 60){
-  //   digitalWrite(5, LOW);
-  // }
-  // else if (timer == 70){
-  //   digitalWrite(5, HIGH);
-  // }
-  // else if (timer == 80){
-  //   digitalWrite(5, LOW);
-  // }
-  // else{
-  //   digitalWrite(5, LOW);
-  // }
 
   if (timer >= 1200 && flag1 == 0)
   {
@@ -248,23 +221,6 @@ void loop()
   lcd.setCursor(0, 3);
   lcd.print(120 - (timer / 10));
   lcd.print("s");
-
-  // if (value <= 10 && value >= 0)
-  // {
-  //   if (millis() - startMillis >= 2000)
-  //   {
-  //     digitalWrite(5, LOW);
-  //     startMillis = millis();
-  //   }
-  //   else if (millis() - startMillis >= 1000)
-  //   {
-  //     digitalWrite(5, HIGH);
-  //   }
-  // }
-  // else
-  // {
-  //   digitalWrite(5, LOW);
-  // }
 }
 // ---------------------------------------------------------------------------------------
 
@@ -322,14 +278,3 @@ void Down_do_1_Click()
   manager_Content.Choseen_Menu--;
   manager_Content.timeInterval = 250;
 }
-
-// unsigned long timeSeriallife = millis();
-
-// void runSerialLife()
-// {
-//   if (millis() - timeSeriallife >= 1000)
-//   {
-//     timeSeriallife = millis();
-//     Serial.println("I live!");
-//   }
-// }

@@ -16,6 +16,7 @@
         "xutility": "cpp",
         "charconv": "cpp",
         "locale": "cpp",
-        "xlocale": "cpp"
+        "xlocale": "cpp",
+        "xmemory": "cpp"
     }
 }

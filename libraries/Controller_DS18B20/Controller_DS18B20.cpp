@@ -6,19 +6,16 @@ DallasTemperature sensor(&oneWire);
 Controller_DS18B20_Data::Controller_DS18B20_Data()
 {
   this->nameDevice = "DS18B20";
-  this->timeInterval = 100;
-  this->valueDevice = "No device";
+  this->timeInterval = 250;
+  this->valueDevice = "x2Click to Start";
   // Add your code here
 }
 
 bool Controller_DS18B20_Data::getData()
 {
   // Add your code here
-  this->valueDevice = "";
   sensor.requestTemperatures();
-  this->valueDevice += String(sensor.getTempCByIndex(0));
-  this->valueDevice += String(char(223));
-  this->valueDevice += "C";
+  this->valueDevice = String(sensor.getTempCByIndex(0)) + String(char(223)) + "C";
 
   return true;
 }
@@ -33,7 +30,7 @@ bool Controller_DS18B20_Data::init()
 bool Controller_DS18B20_Data::deInit()
 {
   // Add your code here
-  // pinMode(ONE_WIRE_BUS, INPUT);
+  
   return 1;
 }
 

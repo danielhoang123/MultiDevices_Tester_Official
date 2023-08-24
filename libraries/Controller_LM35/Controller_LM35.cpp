@@ -5,7 +5,7 @@
 Controller_LM35_Data::Controller_LM35_Data()
 {
   this->nameDevice = "LM35";
-  this->timeInterval = 50;
+  this->timeInterval = 250;
   this->valueDevice = "No device";
   // Add your code here
 }
@@ -13,10 +13,8 @@ Controller_LM35_Data::Controller_LM35_Data()
 bool Controller_LM35_Data::getData()
 {
   // Add your code here
-  this->valueDevice = "";
-  this->valueDevice += String(lm35x.getCalculated(),2);
-  this->valueDevice += String(char(223));
-  this->valueDevice += "C";
+  this->valueDevice = String(lm35x.getCalculated(), 2) + String(char(223)) + "C";
+
   return true;
 }
 
