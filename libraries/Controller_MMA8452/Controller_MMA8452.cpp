@@ -7,7 +7,7 @@ Controller_MMA8452_Data::Controller_MMA8452_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x1C);
-  this->Add_HsCode(190);
+  //this->Add_HsCode(190);
   // Add your code here
 
 }

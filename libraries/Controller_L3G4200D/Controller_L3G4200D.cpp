@@ -7,7 +7,7 @@ Controller_L3G4200D_Data::Controller_L3G4200D_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x69);
-  this->Add_HsCode(196);
+  // this->Add_HsCode(196);
   // Add your code here
 
 }

@@ -1,6 +1,6 @@
 #include "Controller_DHT.h"
 #include "MachTest_SP_IO.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Dht_Data::Dht_Data()
 {
@@ -15,18 +15,18 @@ bool Dht_Data::getData()
 
     if (dht)
     {
-        debug_DHT_ln(F("Start Read DHT"));
+        // debug_DHT_ln(F("Start Read DHT"));
         float h, t;
         h = dht->readHumidity();
         t = dht->readTemperature();
-        debug_DHT_ln(F("Done Read DHT"));
+        // debug_DHT_ln(F("Done Read DHT"));
         // if (isnan(h) || isnan(t))
         //     return true;
 
         String tempString = String(t) + "    " + String(h);
         this->valueDevice = String(t) + String(char(223)) + "C";
         this->valueDevice1 = String(h) + "%";
-        debug_DHT_ln(tempString);
+        // debug_DHT_ln(tempString);
     }
 
     return true;

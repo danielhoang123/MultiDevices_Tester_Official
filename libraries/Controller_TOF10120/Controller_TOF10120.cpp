@@ -7,7 +7,7 @@ Controller_TOF10120_Data::Controller_TOF10120_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x52);
-  this->Add_HsCode(1318);
+  //this->Add_HsCode(1318);
   // Add your code here
 
 }

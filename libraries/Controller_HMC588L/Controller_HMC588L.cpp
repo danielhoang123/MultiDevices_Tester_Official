@@ -7,7 +7,7 @@ Controller_HMC588L_Data::Controller_HMC588L_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x1E);
-  this->Add_HsCode(205);
+  // this->Add_HsCode(205);
   // Add your code here
 
 }

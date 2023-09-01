@@ -1,5 +1,5 @@
 #include "Controller_GY906.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_GY906_Data::Controller_GY906_Data()
 {
@@ -7,7 +7,7 @@ Controller_GY906_Data::Controller_GY906_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x5A);
-  this->Add_HsCode(1450);
+  // this->Add_HsCode(1450);
   // Add your code here
 
 }

@@ -7,7 +7,7 @@ Controller_SHT30_Data::Controller_SHT30_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x44);
-  this->Add_HsCode(1582);
+  //this->Add_HsCode(1582);
   // Add your code here
 
 }

@@ -1,5 +1,5 @@
 #include "Controller_ADXL345.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_ADXL345_Data::Controller_ADXL345_Data()
 {
@@ -7,7 +7,7 @@ Controller_ADXL345_Data::Controller_ADXL345_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x53);
-  this->Add_HsCode(143);
+  // this->Add_HsCode(143);
   // Add your code here
 
 }

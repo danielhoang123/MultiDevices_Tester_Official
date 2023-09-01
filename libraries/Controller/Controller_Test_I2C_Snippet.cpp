@@ -1,5 +1,5 @@
 #include "Controller_Test_I2C_Snippet.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_Test_I2C_Snippet_Data::Controller_Test_I2C_Snippet_Data()
 {
@@ -7,7 +7,7 @@ Controller_Test_I2C_Snippet_Data::Controller_Test_I2C_Snippet_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->i2cAddress = 0x68;
-  Set_HS_Code(1518);
+  // Set_HS_Code(1518);
   // Add your code here
 
 }

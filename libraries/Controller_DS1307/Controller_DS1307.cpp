@@ -1,5 +1,5 @@
 #include "Controller_DS1307.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_DS1307_Data::Controller_DS1307_Data()
 {
@@ -7,7 +7,7 @@ Controller_DS1307_Data::Controller_DS1307_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x68);
-  this->Add_HsCode(865);
+  // this->Add_HsCode(865);
   // Add your code here
 
 }

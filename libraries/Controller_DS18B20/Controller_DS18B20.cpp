@@ -1,8 +1,10 @@
 #include "Controller_DS18B20.h"
 #include "MachTest_SP_IO.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
+
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensor(&oneWire);
+
 Controller_DS18B20_Data::Controller_DS18B20_Data()
 {
   this->nameDevice = "DS18B20";

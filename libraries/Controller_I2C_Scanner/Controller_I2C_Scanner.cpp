@@ -4,7 +4,7 @@
 Controller_I2C_Scanner_Data::Controller_I2C_Scanner_Data()
 {
     this->nameDevice = "I2C Scanner";
-    this->timeInterval = 250;
+    this->timeInterval = 2000;
     this->valueDevice = "x2 Click to Scan";
     // Add your code here
 }

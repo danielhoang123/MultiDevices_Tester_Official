@@ -1,5 +1,5 @@
 #include "Controller_AHT20.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_AHT20_Data::Controller_AHT20_Data()
 {
@@ -7,7 +7,7 @@ Controller_AHT20_Data::Controller_AHT20_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x38);
-  this->Add_HsCode(1437);
+  // this->Add_HsCode(1437);
   // Add your code here
 
 }

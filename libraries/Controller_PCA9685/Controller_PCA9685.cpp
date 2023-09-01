@@ -7,7 +7,7 @@ Controller_PCA9685_Data::Controller_PCA9685_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x40);
-  this->Add_HsCode(928);
+  //this->Add_HsCode(928);
   // Add your code here
 
 }

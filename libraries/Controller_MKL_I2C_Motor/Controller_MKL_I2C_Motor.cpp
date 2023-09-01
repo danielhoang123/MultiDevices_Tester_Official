@@ -8,7 +8,7 @@ Controller_MKL_I2C_Motor::Controller_MKL_I2C_Motor()
     this->Add_AddressList(0x40+3);
     this->Add_AddressList(0x40+4);
     
-    this->Add_HsCode(1518);
+    // this->Add_HsCode(1518);
 
     this->nameDevice = "MKL I2C Driver";
     this->timeInterval = 1;

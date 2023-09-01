@@ -38,7 +38,7 @@ bool Manager_Content::getData()
         }
 
         //
-        lcd.clear();         // Xóa màn hình
+        // lcd.clear();         // Xóa màn hình
         lcd.setCursor(2, 0); // Cột 2 dòng 0
         lcd.print(this->my_Devices_List.get(tempCurrentIndex)->nameDevice);
         lcd.setCursor(2, 1); // Cột 2 dòng 0

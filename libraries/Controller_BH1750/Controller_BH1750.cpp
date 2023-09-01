@@ -1,5 +1,5 @@
 #include "Controller_BH1750.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_BH1750_Data::Controller_BH1750_Data()
 {
@@ -7,7 +7,7 @@ Controller_BH1750_Data::Controller_BH1750_Data()
   this->timeInterval = 100;
   this->valueDevice = "No device";
   this->Add_AddressList(0x23);
-  this->Add_HsCode(159);
+  // this->Add_HsCode(159);
   // Add your code here
 
 }

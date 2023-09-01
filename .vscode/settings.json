@@ -17,6 +17,8 @@
         "charconv": "cpp",
         "locale": "cpp",
         "xlocale": "cpp",
-        "xmemory": "cpp"
+        "xmemory": "cpp",
+        "thread": "cpp",
+        "map": "cpp"
     }
 }

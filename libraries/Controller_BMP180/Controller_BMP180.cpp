@@ -1,5 +1,5 @@
 #include "Controller_BMP180.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_BMP180_Data::Controller_BMP180_Data()
 {
@@ -7,7 +7,7 @@ Controller_BMP180_Data::Controller_BMP180_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x77);
-  this->Add_HsCode(152);
+  // this->Add_HsCode(152);
   // Add your code here
 
 }

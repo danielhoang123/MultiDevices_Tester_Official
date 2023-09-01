@@ -1,5 +1,5 @@
 #include "Controller_GY_HMC588L.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 MPU6050 accelgyro;
 HMC5883L mag;
@@ -10,7 +10,7 @@ Controller_GY_HMC588L_Data::Controller_GY_HMC588L_Data()
     this->timeInterval = 250;
     this->valueDevice = "No device";
     this->Add_AddressList(0x68);
-    this->Add_HsCode(194);
+    // this->Add_HsCode(194);
     // Add your code here
 }
 

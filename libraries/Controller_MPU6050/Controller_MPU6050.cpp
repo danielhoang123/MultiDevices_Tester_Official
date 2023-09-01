@@ -1,5 +1,5 @@
 #include "Controller_MPU6050.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_MPU6050_Data::Controller_MPU6050_Data()
 {
@@ -7,7 +7,7 @@ Controller_MPU6050_Data::Controller_MPU6050_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x68);
-  this->Add_HsCode(142);
+  //this->Add_HsCode(142);
   // Add your code here
 }
 

@@ -7,7 +7,7 @@ Controller_Oled_1_3Inch_Data::Controller_Oled_1_3Inch_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x3C);
-  this->Add_HsCode(618);
+  //this->Add_HsCode(618);
   // Add your code here
 
 }

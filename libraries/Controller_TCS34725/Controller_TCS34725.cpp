@@ -12,7 +12,7 @@ Controller_TCS34725_Data::Controller_TCS34725_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x29);
-  this->Add_HsCode(1518);
+  //this->Add_HsCode(1518);
   // Add your code here
 
 }

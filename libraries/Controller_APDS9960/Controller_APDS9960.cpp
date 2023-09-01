@@ -1,5 +1,5 @@
 #include "Controller_APDS9960.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_APDS9960_Data::Controller_APDS9960_Data()
 {
@@ -7,7 +7,7 @@ Controller_APDS9960_Data::Controller_APDS9960_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x39);
-  this->Add_HsCode(197);
+  // this->Add_HsCode(197);
   // Add your code here
 
 }

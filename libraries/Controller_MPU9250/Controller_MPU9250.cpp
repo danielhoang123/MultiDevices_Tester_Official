@@ -1,5 +1,5 @@
 #include "Controller_MPU9250.h"
-#include "debugkxn.h"
+// #include "debugkxn.h"
 
 Controller_MPU9250_Data::Controller_MPU9250_Data()
 {
@@ -7,7 +7,7 @@ Controller_MPU9250_Data::Controller_MPU9250_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x68);
-  this->Add_HsCode(195);
+  //this->Add_HsCode(195);
   // Add your code here
 }
 
@@ -22,9 +22,12 @@ bool Controller_MPU9250_Data::getData()
   this->valueDevice1 = "";
   this->valueDevice2 = "";
 
-  this->valueDevice += "Yaw: " + String(mpu.getYaw(), 2);
-  this->valueDevice1 += "Pitch: " + String(mpu.getPitch(), 2);
-  this->valueDevice2 += "Roll: " + String(mpu.getRoll(), 2);
+  if (imu.Read())
+  {
+    this->valueDevice = String(imu.accel_x_mps2(), 2) + ";" + String(imu.accel_y_mps2(), 2) + ";" + String(imu.accel_z_mps2(), 2);
+    this->valueDevice1 = String(imu.gyro_x_radps(), 2) + ";" + String(imu.gyro_y_radps(), 2) + ";" + String(imu.gyro_z_radps(), 2);
+    this->valueDevice2 = String(imu.mag_x_ut(), 2) + ";" + String(imu.mag_y_ut(), 2) + ";" + String(imu.mag_z_ut(), 2);
+  }
   return true;
 }
 
@@ -33,8 +36,10 @@ bool Controller_MPU9250_Data::init()
   deInit();
   // Add your code here
   Wire.begin();
-
-  mpu.setup(0x68);
+  Wire.setClock(400000);
+  imu.Config(&Wire, bfs::Mpu9250::I2C_ADDR_PRIM);
+  imu.Begin();
+  imu.ConfigSrd(19);
 
   return 1;
 }

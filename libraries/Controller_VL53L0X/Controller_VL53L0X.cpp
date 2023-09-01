@@ -7,7 +7,7 @@ Controller_VL53L0X_Data::Controller_VL53L0X_Data()
   this->timeInterval = 50;
   this->valueDevice = "No device";
   this->Add_AddressList(0x29);
-  this->Add_HsCode(201);
+  //this->Add_HsCode(201);
   // Add your code here
 
 }

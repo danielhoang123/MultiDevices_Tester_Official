@@ -18,31 +18,32 @@ public:
   callbackFunction LastStartFunction_Click;
   callbackFunction LastStartFunction_DoubleClick;
 
-  LinkedList<uint16_t> hsCode_List = LinkedList<uint16_t>();
-  void Add_HsCode(uint16_t vHscode);
+  // LinkedList<uint16_t> hsCode_List = LinkedList<uint16_t>();
+  // void Add_HsCode(uint16_t vHscode);
 
   Data_Adapter(){};
   virtual ~Data_Adapter(){};
   unsigned long Current_Millis = millis();
-  unsigned long timeInterval = 1000;
+  unsigned long timeInterval = 100;
   String nameDevice;
   String valueDevice;
   String valueDevice1;
   String valueDevice2;
+  
   bool isRun = false;
 
-  uint16_t hsCode;
-  // uint8_t i2cAddress;
+  // uint16_t hsCode;
+  uint8_t i2cAddress;
 
-  void Set_HS_Code(uint16_t hsCode__)
-  {
-    hsCode = hsCode__;
-  }
+  // void Set_HS_Code(uint16_t hsCode__)
+  // {
+  //   hsCode = hsCode__;
+  // }
 
-  uint16_t Get_HS_Code()
-  {
-    return hsCode;
-  }
+  // uint16_t Get_HS_Code()
+  // {
+  //   return hsCode;
+  // }
 
   virtual bool getData() { return 0; };
   virtual bool init() { return 0; };

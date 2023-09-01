@@ -7,8 +7,9 @@
 #include <PN532_I2C.h>
 #include <NfcAdapter.h>
 
-class Controller_PN532_Data: public Model_I2C_Device{
-  public:
+class Controller_PN532_Data : public Model_I2C_Device
+{
+public:
   // Add your declare here
 
   Controller_PN532_Data();

@@ -6,7 +6,7 @@ Controller_MKL_RTC::Controller_MKL_RTC()
     this->nameDevice = "RTC";
     this->timeInterval = 1000;
     this->Add_AddressList(0x68);
-    this->Add_HsCode(1522);
+    // this->Add_HsCode(1522);
 }
 
 Controller_MKL_RTC::~Controller_MKL_RTC()

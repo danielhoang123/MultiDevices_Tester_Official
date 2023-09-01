@@ -7,7 +7,7 @@ Controller_PAJ7620U2_Data::Controller_PAJ7620U2_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x27);
-  this->Add_HsCode(1304);
+  //this->Add_HsCode(1304);
   // Add your code here
 
 }

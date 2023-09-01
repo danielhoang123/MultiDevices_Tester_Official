@@ -9,7 +9,7 @@ Controller_HDC1080_Data::Controller_HDC1080_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x40);
-  this->Add_HsCode(1310);
+  // this->Add_HsCode(1310);
   // Add your code here
 
 }

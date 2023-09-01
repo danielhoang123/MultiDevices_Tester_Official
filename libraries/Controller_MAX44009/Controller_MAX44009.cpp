@@ -7,7 +7,7 @@ Controller_MAX44009_Data::Controller_MAX44009_Data()
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x4A);
-  this->Add_HsCode(1308);
+  // this->Add_HsCode(1308);
   // Add your code here
 
 }

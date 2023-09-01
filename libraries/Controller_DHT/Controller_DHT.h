@@ -3,6 +3,7 @@
 
 #include "DHT.h"
 #include "dataAdapter.h"
+#include "view_LCD_Text.h"
 
 class Dht_Data : public Data_Adapter
 {
