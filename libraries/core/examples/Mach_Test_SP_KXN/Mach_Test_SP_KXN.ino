@@ -238,18 +238,13 @@ void loop()
 
   if (timer == 210)
   {
-    temp_bool1 = 1;
+    lcd.setCursor(3,3);
+    lcd.print(" ");
   }
-
-  if (temp_bool1 == 1 && temp_bool2 == 0)
+  if (timer == 1110)
   {
-    lcd.clear();
-    temp_bool2 = 1;
-  }
-  else
-  {
-    ;
-    ;
+    lcd.setCursor(2,3);
+    lcd.print(" ");
   }
 }
 // ---------------------------------------------------------------------------------------
