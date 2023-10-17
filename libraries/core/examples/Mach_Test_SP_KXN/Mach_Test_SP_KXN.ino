@@ -63,6 +63,7 @@ int timer;
 bool flag1, temp_bool;
 bool temp_bool1 = 0;
 bool temp_bool2 = 0;
+
 void AddManagerContent_Device()
 {
   // manager_Content.my_Devices_List.add(&sieuAm_Device);
@@ -129,6 +130,9 @@ void setup()
 void loop()
 {
 
+  buttonLoop();
+  manager_Content.getData();
+
   int acquiredValue = analogRead(A1);
   float temp_float = acquiredValue * 0.01;
   int value = map(acquiredValue, 880, 1023, 0, 100);
@@ -142,9 +146,6 @@ void loop()
   if (millis() - startMillis >= 5)
   {
     startMillis = millis();
-
-    buttonLoop();
-    manager_Content.getData();
 
     lcd.setCursor(19, 3);
     lcd.print("%");
@@ -238,12 +239,12 @@ void loop()
 
   if (timer == 210)
   {
-    lcd.setCursor(3,3);
+    lcd.setCursor(3, 3);
     lcd.print(" ");
   }
   if (timer == 1110)
   {
-    lcd.setCursor(2,3);
+    lcd.setCursor(2, 3);
     lcd.print(" ");
   }
 }

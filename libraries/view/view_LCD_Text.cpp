@@ -19,7 +19,7 @@ void ShowLCD(String nameDevice__, String valueDevice__, String valueDevice1__, S
     if (millis() - curentTimeShowLCD >= 100)
     {
         curentTimeShowLCD = millis();
-        // lcd.clear();         // Xóa màn hình
+        lcd.clear();         // Xóa màn hình
         lcd.setCursor(0, 0); // Cột 2 dòng 0
         lcd.print(nameDevice__);
         lcd.setCursor(0, 1); // Cột 2 dòng 0

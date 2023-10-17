@@ -235,6 +235,7 @@ void Next_DeviceI2C()
         }
 
         Manager_I2C_Device.currentI2C_DeviceIndex++;
+        
         if (Manager_I2C_Device.currentI2C_DeviceIndex >= Manager_I2C_Device.indexI2CList.size())
             Manager_I2C_Device.currentI2C_DeviceIndex = 0;
 
@@ -244,6 +245,7 @@ void Next_DeviceI2C()
 
         String tempName = tempI2C_Device->nameDevice;
         uint8_t tempValue = Manager_I2C_Device.indexI2CList.get(temI2cIndex).address;
+        lcd.clear();
         ShowLCD(tempName, "0x" + String(tempValue, HEX), "", "");
 
         // debug_manager_I2C_deviceln(F("Next I2C Click "));
