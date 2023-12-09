@@ -5,7 +5,7 @@
 Controller_SR04_Data::Controller_SR04_Data()
 {
   this->nameDevice = "SR04";
-  this->timeInterval = 100;
+  this->timeInterval = 300;
   this->valueDevice = "No device";
   // Add your code here
 }

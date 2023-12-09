@@ -16,6 +16,7 @@
 #include "Controller_NRF.h"
 #include "Controller_RC522.h"
 #include "Controller_I2C_Scanner.h"
+#include "Controller_Servo.h"
 
 // // Include I2C Device
 // #include "Controller_MKL_I2C_Motor.h"
@@ -25,9 +26,9 @@
 // #include "Controller_MKL_RTC_Quoc_Pointer.h"
 // #include "Controller_PAJ7620U2.h"
 
-#include "Controller_Oled_1_3Inch.h"
-#include "Controller_Oled_0_96Inch.h"
-#include "Controller_Oled_0_91Inch.h"
+// #include "Controller_Oled_1_3Inch.h"
+// #include "Controller_Oled_0_96Inch.h"
+// #include "Controller_Oled_0_91Inch.h"
 #include "Controller_SHT30.h"
 #include "Controller_MPU6050.h"
 #include "Controller_HMC588L.h"
@@ -77,6 +78,7 @@ void AddManagerContent_Device()
   manager_Content.my_Devices_List.add(&RC522_Device);
   manager_Content.my_Devices_List.add(&NRF_Device);
   manager_Content.my_Devices_List.add(&I2C_Scanner_Device);
+  manager_Content.my_Devices_List.add(&Servo_Device);
 }
 
 void Add_I2C_Device()
@@ -88,9 +90,9 @@ void Add_I2C_Device()
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MKL_RTC_Quoc_Pointer);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PAJ7620U2);
 
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_1_3Inch);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_96Inch);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_91Inch);
+  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_1_3Inch);
+  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_96Inch);
+  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_91Inch);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_SHT30);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HMC588L);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_BMP180);
@@ -119,7 +121,7 @@ void Add_I2C_Device()
 // ---------------------------------------------------------------------------------------
 void setup()
 {
-  pinMode(5, OUTPUT);
+  pinMode(A2, OUTPUT);
   buttonInit();
   // debug("Start!");
   View_LCD_Text_Init();
@@ -224,17 +226,17 @@ void loop()
 
     if (millis() - startMillis2 >= 1000)
     {
-      digitalWrite(5, LOW);
+      analogWrite(A2, 0);
       startMillis2 = millis();
     }
     else if (millis() - startMillis2 >= 500)
     {
-      digitalWrite(5, HIGH);
+      analogWrite(A2, 255);
     }
   }
   else
   {
-    digitalWrite(5, LOW);
+    analogWrite(A2, 0);
   }
 
   if (timer == 210)

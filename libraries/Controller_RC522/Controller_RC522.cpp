@@ -18,13 +18,13 @@ bool Controller_RC522_Data::getData()
   this->valueDevice = "";
   if (!mfrc522.PICC_IsNewCardPresent())
   {
-    return;
+    return false;
   }
 
   // Select one of the cards
   if (!mfrc522.PICC_ReadCardSerial())
   {
-    return;
+    return false;
   }
   String content = "";
   byte letter;
