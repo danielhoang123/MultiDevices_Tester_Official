@@ -1,6 +1,7 @@
 // #include "debugkxn.h"
 #include "Manager_Content.h"
 #include "Manager_I2C_Devices.h"
+#include "Manager_BatteryNBuzzer.h"
 #include "Btn_Process.h"
 #include "view_LCD_Text.h"
 
@@ -17,6 +18,7 @@
 #include "Controller_RC522.h"
 #include "Controller_I2C_Scanner.h"
 #include "Controller_Servo.h"
+#include "Controller_AnalogRead.h"
 
 // // Include I2C Device
 // #include "Controller_MKL_I2C_Motor.h"
@@ -26,7 +28,7 @@
 // #include "Controller_MKL_RTC_Quoc_Pointer.h"
 // #include "Controller_PAJ7620U2.h"
 
-// #include "Controller_Oled_1_3Inch.h"
+#include "Controller_Oled_1_3Inch.h"
 // #include "Controller_Oled_0_96Inch.h"
 // #include "Controller_Oled_0_91Inch.h"
 #include "Controller_SHT30.h"
@@ -53,17 +55,7 @@
 #include "Controller_PN532.h"
 #include "Controller_GY_HMC588L.h"
 
-unsigned long startMillis = 0;
-unsigned long startMillis1 = 0;
-unsigned long startMillis2 = 0;
 
-// int acquiredValue, value;
-// float temp_float;
-int timer;
-
-bool flag1, temp_bool;
-bool temp_bool1 = 0;
-bool temp_bool2 = 0;
 
 void AddManagerContent_Device()
 {
@@ -76,9 +68,11 @@ void AddManagerContent_Device()
   manager_Content.my_Devices_List.add(&LM35_Device);
   manager_Content.my_Devices_List.add(&DS18B20_Device);
   manager_Content.my_Devices_List.add(&RC522_Device);
+  manager_Content.my_Devices_List.add(&Analog_Device);
   manager_Content.my_Devices_List.add(&NRF_Device);
-  manager_Content.my_Devices_List.add(&I2C_Scanner_Device);
   manager_Content.my_Devices_List.add(&Servo_Device);
+  manager_Content.my_Devices_List.add(&I2C_Scanner_Device);
+  
 }
 
 void Add_I2C_Device()
@@ -90,7 +84,7 @@ void Add_I2C_Device()
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_MKL_RTC_Quoc_Pointer);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_PAJ7620U2);
 
-  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_1_3Inch);
+  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_1_3Inch);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_96Inch);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_91Inch);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_SHT30);
@@ -121,134 +115,23 @@ void Add_I2C_Device()
 // ---------------------------------------------------------------------------------------
 void setup()
 {
-  pinMode(A2, OUTPUT);
   buttonInit();
   // debug("Start!");
+  // Serial.begin(9600);
   View_LCD_Text_Init();
   manager_Content.begin();
-  temp_bool1 = 0;
-  temp_bool2 = 0;
+  pinMode(A2, OUTPUT);
 }
 void loop()
 {
 
   buttonLoop();
   manager_Content.getData();
+  BuzzBat_Content.Battery_LCD();
+  BuzzBat_Content.Buzzer_Timer();
+  BuzzBat_Content.Buzzer_Blinking();
 
-  int acquiredValue = analogRead(A1);
-  float temp_float = acquiredValue * 0.01;
-  int value = map(acquiredValue, 880, 1023, 0, 100);
-
-  if (millis() - startMillis1 >= 100)
-  {
-    timer++;
-    startMillis1 = millis();
-  }
-
-  if (millis() - startMillis >= 5)
-  {
-    startMillis = millis();
-
-    lcd.setCursor(19, 3);
-    lcd.print("%");
-
-    if (temp_float != 0)
-    {
-      if (temp_float >= 10.03 && temp_float < 10.15)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("90%");
-      }
-      else if (temp_float >= 9.89 && temp_float < 10.01)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("80%");
-      }
-
-      else if (temp_float >= 9.75 && temp_float < 9.87)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("70%");
-      }
-      else if (temp_float >= 9.61 && temp_float < 9.73)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("60%");
-      }
-      else if (temp_float >= 9.47 && temp_float < 9.59)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("50%");
-      }
-      else if (temp_float >= 9.33 && temp_float < 9.45)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("40%");
-      }
-      else if (temp_float >= 9.19 && temp_float < 9.31)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("30%");
-      }
-      else if (temp_float >= 9.05 && temp_float < 9.17)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("20%");
-      }
-      else if (temp_float >= 8.91 && temp_float < 9.03)
-      {
-        lcd.setCursor(17, 3);
-        lcd.print("10%");
-      }
-      else if (temp_float >= 10.15)
-      {
-        lcd.setCursor(16, 3);
-        lcd.print("100%");
-      }
-    }
-    lcd.setCursor(0, 3);
-    lcd.print(120 - (timer / 10));
-    lcd.print("s");
-  }
-
-  // phân biệt giữa nguồn DC và nguồn pin
-  if (acquiredValue >= 1015)
-  {
-    flag1 = 1;
-  }
-  else
-  {
-    flag1 = 0;
-  }
-
-  if (timer >= 1200 && flag1 == 0)
-  {
-
-    if (millis() - startMillis2 >= 1000)
-    {
-      analogWrite(A2, 0);
-      startMillis2 = millis();
-    }
-    else if (millis() - startMillis2 >= 500)
-    {
-      analogWrite(A2, 255);
-    }
-  }
-  else
-  {
-    analogWrite(A2, 0);
-  }
-
-  if (timer == 210)
-  {
-    lcd.setCursor(3, 3);
-    lcd.print(" ");
-  }
-  if (timer == 1110)
-  {
-    lcd.setCursor(2, 3);
-    lcd.print(" ");
-  }
+  // buzzer();
 }
 // ---------------------------------------------------------------------------------------
 

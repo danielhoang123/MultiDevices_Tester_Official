@@ -4,7 +4,7 @@
 
 // include your Libraries here
 #include "quoc_LM35_Kalman.h"
-
+// #define lm35_pin A0
 class Controller_LM35_Data: public Data_Adapter{
   public:
   // Add your declare here

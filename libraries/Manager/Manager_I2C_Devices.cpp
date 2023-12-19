@@ -7,7 +7,7 @@
 Manager_I2C_Data::Manager_I2C_Data()
 {
     this->nameDevice = "Manager_I2C";
-    this->timeInterval = 2000;
+    this->timeInterval = 250;
     this->valueDevice = "2 click Start";
     this->isRun = false;
 }
@@ -48,7 +48,7 @@ bool Manager_I2C_Data::init()
 bool Manager_I2C_Data::deInit()
 {
     this->nameDevice = "Manager_I2C";
-    this->timeInterval = 2000;
+    this->timeInterval = 250;
     this->valueDevice = "No device";
     this->isRun = false;
     Stop_DeviceI2C();

@@ -19,9 +19,9 @@ bool Controller_nRF_Data::init()
 {
   deInit();
   // Add your code here
-  // pinMode(button_pin, INPUT);
   RF24 radio(9, 10);
   const byte address[6] = "12345";
+  
   radio.begin();
   radio.openWritingPipe(address);
   radio.setPALevel(RF24_PA_MIN);

@@ -2,9 +2,6 @@
 #include "MachTest_SP_IO.h"
 // #include "debugkxn.h"
 
-OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensor(&oneWire);
-
 Controller_DS18B20_Data::Controller_DS18B20_Data()
 {
   this->nameDevice = "DS18B20";
@@ -16,6 +13,8 @@ Controller_DS18B20_Data::Controller_DS18B20_Data()
 bool Controller_DS18B20_Data::getData()
 {
   // Add your code here
+  OneWire oneWire(ONE_WIRE_BUS);
+  DallasTemperature sensor(&oneWire);
   sensor.requestTemperatures();
   this->valueDevice = String(sensor.getTempCByIndex(0)) + String(char(223)) + "C";
 
@@ -32,7 +31,7 @@ bool Controller_DS18B20_Data::init()
 bool Controller_DS18B20_Data::deInit()
 {
   // Add your code here
-  
+
   return 1;
 }
 

@@ -2,15 +2,10 @@
 #include "MachTest_SP_IO.h"
 #include "debugkxn.h"
 
-RF24 radio1(9, 10);
-const byte address1[6] = "12345";
-bool led_mode = 0;
-boolean button_state1 = 0;
-
 Controller_NRFRx_Data::Controller_NRFRx_Data()
 {
   this->nameDevice = "NRF Rx";
-  this->timeInterval = 100;
+  this->timeInterval = 250;
   this->valueDevice = "No device";
   // Add your code here
 }
@@ -18,15 +13,18 @@ Controller_NRFRx_Data::Controller_NRFRx_Data()
 bool Controller_NRFRx_Data::getData()
 {
   // Add your code here
-  radio.startListening();
-  if (radio.available())
+  this->valueDevice = "";
+
+  radio_RX.startListening();
+
+  if (radio_RX.available())
   {
-    char text[32] = "";
-    radio.read(&text, sizeof(text));
-    ledState = !ledState;
-    digitalWrite(8, ledState);
+    Serial.println("Hello");
+    char text[32] = {0};
+    radio_RX.read(&text, sizeof(text));
+    this->valueDevice += String(text);
+    //analogWrite(A2, 255);
   }
-  delay(5);
   return true;
 }
 
@@ -36,10 +34,13 @@ bool Controller_NRFRx_Data::init()
   // Add your code here
   pinMode(A2, OUTPUT);
 
-  radio1.begin();
-  radio1.openReadingPipe(0, address1);
-  radio1.setPALevel(RF24_PA_MIN);
-  radio1.startListening();
+  RF24 radio_RX(9, 10);
+  const byte address1[6] = "12345";
+
+  radio_RX.begin();
+  radio_RX.openReadingPipe(0, address1);
+  radio_RX.setPALevel(RF24_PA_MAX);
+  radio_RX.startListening();
 
   return 1;
 }

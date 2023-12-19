@@ -4,12 +4,14 @@
 
 // include your Libraries here
 #include <SPI.h>
+#include <nRF24L01.h>
 #include <RF24.h>
 
 class Controller_nRF_Data : public Data_Adapter
 {
 public:
   // Add your declare here
+  
   RF24 radio;
   
   Controller_nRF_Data();

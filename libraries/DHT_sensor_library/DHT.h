@@ -23,22 +23,22 @@
 /* Uncomment to enable printing out nice debug messages. */
 //#define DHT_DEBUG
 
-// #define DEBUG_PRINTER                                                          \
-//   Serial /**< Define where debug output will be printed.                       \
-//           */
+#define DEBUG_PRINTER                                                          \
+  Serial /**< Define where debug output will be printed.                       \
+          */
 
-// /* Setup debug printing macros. */
-// #ifdef DHT_DEBUG
-// #define DEBUG_PRINT(...)                                                       \
-//   { DEBUG_PRINTER.print(__VA_ARGS__); }
-// #define DEBUG_PRINTLN(...)                                                     \
-//   { DEBUG_PRINTER.println(__VA_ARGS__); }
-// #else
-// #define DEBUG_PRINT(...)                                                       \
-//   {} /**< Debug Print Placeholder if Debug is disabled */
-// #define DEBUG_PRINTLN(...)                                                     \
-//   {} /**< Debug Print Line Placeholder if Debug is disabled */
-// #endif
+/* Setup debug printing macros. */
+#ifdef DHT_DEBUG
+#define DEBUG_PRINT(...)                                                       \
+  { DEBUG_PRINTER.print(__VA_ARGS__); }
+#define DEBUG_PRINTLN(...)                                                     \
+  { DEBUG_PRINTER.println(__VA_ARGS__); }
+#else
+#define DEBUG_PRINT(...)                                                       \
+  {} /**< Debug Print Placeholder if Debug is disabled */
+#define DEBUG_PRINTLN(...)                                                     \
+  {} /**< Debug Print Line Placeholder if Debug is disabled */
+#endif
 
 /* Define types of sensors. */
 static const uint8_t DHT11{11};  /**< DHT TYPE 11 */
@@ -47,15 +47,15 @@ static const uint8_t DHT21{21};  /**< DHT TYPE 21 */
 static const uint8_t DHT22{22};  /**< DHT TYPE 22 */
 static const uint8_t AM2301{21}; /**< AM2301 */
 
-// #if defined(TARGET_NAME) && (TARGET_NAME == ARDUINO_NANO33BLE)
-// #ifndef microsecondsToClockCycles
-// /*!
-//  * As of 7 Sep 2020 the Arduino Nano 33 BLE boards do not have
-//  * microsecondsToClockCycles defined.
-//  */
-// #define microsecondsToClockCycles(a) ((a) * (SystemCoreClock / 1000000L))
-// #endif
-// #endif
+#if defined(TARGET_NAME) && (TARGET_NAME == ARDUINO_NANO33BLE)
+#ifndef microsecondsToClockCycles
+/*!
+ * As of 7 Sep 2020 the Arduino Nano 33 BLE boards do not have
+ * microsecondsToClockCycles defined.
+ */
+#define microsecondsToClockCycles(a) ((a) * (SystemCoreClock / 1000000L))
+#endif
+#endif
 
 /*!
  *  @brief  Class that stores state and functions for DHT
@@ -95,14 +95,14 @@ private:
 class InterruptLock {
 public:
   InterruptLock() {
-// #if !defined(ARDUINO_ARCH_NRF52)
-//     noInterrupts();
-// #endif
+#if !defined(ARDUINO_ARCH_NRF52)
+    noInterrupts();
+#endif
   }
   ~InterruptLock() {
-// #if !defined(ARDUINO_ARCH_NRF52)
-//     interrupts();
-// #endif
+#if !defined(ARDUINO_ARCH_NRF52)
+    interrupts();
+#endif
   }
 };
 

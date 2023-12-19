@@ -21,7 +21,8 @@
 //     manager_Content.my_Devices_List.add(&sieuAm_Device);
 // }
 extern void AddManagerContent_Device();
-bool Manager_Content::getData() 
+
+bool Manager_Content::getData()
 {
     if (millis() - this->Current_Millis > this->timeInterval) // Sau mỗi 0.25s mới cập nhập
     {
@@ -38,14 +39,14 @@ bool Manager_Content::getData()
         }
 
         //
-        ShowLCD(this->my_Devices_List.get(tempCurrentIndex)->nameDevice, this->my_Devices_List.get(tempCurrentIndex)->valueDevice, this->my_Devices_List.get(tempCurrentIndex)->valueDevice1, "");
+        // ShowLCD(this->my_Devices_List.get(tempCurrentIndex)->nameDevice, this->my_Devices_List.get(tempCurrentIndex)->valueDevice, this->my_Devices_List.get(tempCurrentIndex)->valueDevice1, "");
         // lcd.clear();         // Xóa màn hình
-        // lcd.setCursor(2, 0); // Cột 2 dòng 0
-        // lcd.print(this->my_Devices_List.get(tempCurrentIndex)->nameDevice);
-        // lcd.setCursor(2, 1); // Cột 2 dòng 0
-        // lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice);
-        // lcd.setCursor(2, 2); // Cột 2 dòng 0
-        // lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice1);
+        lcd.setCursor(2, 0); // Cột 2 dòng 0
+        lcd.print(this->my_Devices_List.get(tempCurrentIndex)->nameDevice);
+        lcd.setCursor(2, 1); // Cột 2 dòng 0
+        lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice);
+        lcd.setCursor(2, 2); // Cột 2 dòng 0
+        lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice1);
         this->timeInterval = this->my_Devices_List.get(tempCurrentIndex)->timeInterval;
     }
     return 1;

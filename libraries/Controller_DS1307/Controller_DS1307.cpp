@@ -22,7 +22,7 @@ bool Controller_DS1307_Data::getData()
   // Add your code here
   this->valueDevice = "";
 
-  // this->now = new DateTime; 
+  // this->now = new DateTime;
   DateTime now = rtc1.now();
 
   this->valueDevice = String(now.day()) + "/" + String(now.month()) + "/" + String(now.year());
@@ -37,9 +37,12 @@ bool Controller_DS1307_Data::init()
   deInit();
   // Add your code here
   RTC_DS1307 rtc1;
+  
   Wire.begin();
   rtc1.begin();
+
   DateTime now = rtc1.now();
+
   int a = int(now.hour());
   int b = int(now.minute());
   int c = int(now.second());

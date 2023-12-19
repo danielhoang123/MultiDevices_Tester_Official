@@ -7,7 +7,7 @@ int servoPin = 5;
 Controller_Servo_Data::Controller_Servo_Data()
 {
     this->nameDevice = "Servo";
-    this->timeInterval = 700;
+    this->timeInterval = 1500;
     this->valueDevice = "No device";
     // Add your code here
 }
