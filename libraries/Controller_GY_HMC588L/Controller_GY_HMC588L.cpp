@@ -1,9 +1,6 @@
 #include "Controller_GY_HMC588L.h"
 // #include "debugkxn.h"
 
-MPU6050 accelgyro;
-HMC5883L mag;
-
 Controller_GY_HMC588L_Data::Controller_GY_HMC588L_Data()
 {
     this->nameDevice = "HMC588L from GY86(7)";
@@ -22,6 +19,18 @@ bool Controller_GY_HMC588L_Data::getData()
 {
     // Add your code here
     this->valueDevice = "";
+    
+    MPU6050 accelgyro;
+    HMC5883L mag;
+    Wire.begin();
+
+    accelgyro.setI2CMasterModeEnabled(false);
+    accelgyro.setI2CBypassEnabled(true);
+    accelgyro.setSleepEnabled(false);
+
+    mag.initialize();
+
+    
     mag.getHeading(&mx, &my, &mz);
     float heading = atan2(my, mx);
 
@@ -38,13 +47,7 @@ bool Controller_GY_HMC588L_Data::init()
 {
     deInit();
     // Add your code here
-    Wire.begin();
-    accelgyro.setI2CMasterModeEnabled(false);
 
-    accelgyro.setI2CBypassEnabled(true);
-    accelgyro.setSleepEnabled(false);
-
-    mag.initialize();
     return 1;
 }
 

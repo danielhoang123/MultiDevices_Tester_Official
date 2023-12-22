@@ -33,7 +33,7 @@
 // #include "Controller_Oled_0_91Inch.h"
 #include "Controller_SHT30.h"
 #include "Controller_MPU6050.h"
-#include "Controller_HMC588L.h"
+// #include "Controller_HMC588L.h"
 #include "Controller_BMP180.h"
 #include "Controller_AHT20.h"
 #include "Controller_BH1750.h"
@@ -88,7 +88,7 @@ void Add_I2C_Device()
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_96Inch);
   // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_Oled_0_91Inch);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_SHT30);
-  Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HMC588L);
+  // Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_HMC588L);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_BMP180);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_AHT20);
   Manager_I2C_Device.myI2C_Devices_List.add(&device_Controller_BH1750);

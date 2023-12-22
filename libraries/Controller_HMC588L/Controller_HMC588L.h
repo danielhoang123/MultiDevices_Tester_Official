@@ -11,9 +11,7 @@
 class Controller_HMC588L_Data: public Model_I2C_Device{
   public:
   // Add your declare here
-  MPU6050 * accelgyro1;
-  HMC5883L * mag;
-  TwoWire * pWire1;
+  
 
   Controller_HMC588L_Data();
   ~Controller_HMC588L_Data();
