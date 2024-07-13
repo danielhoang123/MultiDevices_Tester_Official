@@ -4,9 +4,8 @@
 
 // include your Libraries here
 #include "Wire.h"
-#include "I2Cdev.h"
-#include "MPU6050.h"
-#include "HMC5883L.h"
+
+#define ADDRESS 0x1E //0011110b, I2C 7bit address of HMC5883
 
 class Controller_HMC588L_Data: public Model_I2C_Device{
   public:

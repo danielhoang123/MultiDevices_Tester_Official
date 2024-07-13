@@ -1,6 +1,9 @@
 #include "Controller_GY_HMC588L.h"
 // #include "debugkxn.h"
 
+MPU6050 accelgyro;
+QMC5883LCompass compass;
+
 Controller_GY_HMC588L_Data::Controller_GY_HMC588L_Data()
 {
     this->nameDevice = "HMC588L from GY86(7)";
@@ -18,28 +21,30 @@ Controller_GY_HMC588L_Data::~Controller_GY_HMC588L_Data()
 bool Controller_GY_HMC588L_Data::getData()
 {
     // Add your code here
-    this->valueDevice = "";
-    
-    MPU6050 accelgyro;
-    HMC5883L mag;
-    Wire.begin();
+    this->valueDevice = "RAW Value:";
+    this->valueDevice1 = "";
+    this->valueDevice2 = "";
 
-    accelgyro.setI2CMasterModeEnabled(false);
-    accelgyro.setI2CBypassEnabled(true);
-    accelgyro.setSleepEnabled(false);
+    compass.read();
 
-    mag.initialize();
+    int x = compass.getX();
+    int y = compass.getY();
+    int z = compass.getZ();
 
-    
-    mag.getHeading(&mx, &my, &mz);
-    float heading = atan2(my, mx);
+    this->valueDevice1 += "x: " + String(x) + " ; " + "y: " + String(y);
+    this->valueDevice2 += "z: " + String(z);
+    // int a;
 
-    if (heading < 0)
-        heading += 2 * M_PI;
+    // // Read compass values
+    // compass.read();
 
-    float trueHeading = heading * 180 / M_PI;
-    this->valueDevice = String(trueHeading, 2) + " from North";
+    // // Return Azimuth reading
+    // a = compass.getAzimuth();
 
+    // Serial.print("A: ");
+    // Serial.print(a);
+    // Serial.println();
+    // this->valueDevice1 += String(a);
     return true;
 }
 
@@ -47,6 +52,13 @@ bool Controller_GY_HMC588L_Data::init()
 {
     deInit();
     // Add your code here
+
+    Wire.begin();
+    accelgyro.setI2CMasterModeEnabled(false);
+    accelgyro.setI2CBypassEnabled(true);
+    accelgyro.setSleepEnabled(false);
+
+    compass.init();
 
     return 1;
 }

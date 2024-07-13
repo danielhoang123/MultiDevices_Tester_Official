@@ -33,6 +33,7 @@
         "list": "cpp",
         "system_error": "cpp",
         "xhash": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "ostream": "cpp"
     }
 }

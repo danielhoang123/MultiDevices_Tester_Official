@@ -6,13 +6,14 @@
 #include "Wire.h"
 #include "I2Cdev.h"
 #include "MPU6050.h"
-#include "HMC5883L.h"
+// #include "HMC5883L.h"
+#include <QMC5883LCompass.h>
 
 class Controller_GY_HMC588L_Data : public Model_I2C_Device
 {
 public:
     // Add your declare here
-    int16_t mx, my, mz;
+    
     Controller_GY_HMC588L_Data();
     ~Controller_GY_HMC588L_Data();
     bool getData();

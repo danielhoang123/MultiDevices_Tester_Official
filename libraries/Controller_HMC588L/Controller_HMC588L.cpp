@@ -3,7 +3,7 @@
 
 Controller_HMC588L_Data::Controller_HMC588L_Data()
 {
-  this->nameDevice = "HMC588L";
+  this->nameDevice = "HMC5883L";
   this->timeInterval = 250;
   this->valueDevice = "No device";
   this->Add_AddressList(0x1E);
@@ -19,27 +19,35 @@ bool Controller_HMC588L_Data::getData()
 {
   // Add your code here
   this->valueDevice = "";
+  this->valueDevice1 = "";
 
-  this->accelgyro1 = new MPU6050();
-  this->mag = new HMC5883L();
-  this->pWire1 = new TwoWire();
+  int x, y, z; // triple axis data
+  int xmin, xmax, ymin, ymax, zmin, zmax;
+  xmin = 0;
+  xmax = 0;
+  ymax = 0;
+  ymin = 0;
+  zmin = 0;
+  zmax = 0;
 
-  this->pWire1->begin();
-  this->accelgyro1->setI2CMasterModeEnabled(false);
+  // Tell the HMC5883 where to begin reading data
+  Wire.beginTransmission(ADDRESS);
+  Wire.write(0x03); // select register 3, X MSB register
+  Wire.endTransmission();
 
-  this->accelgyro1->setI2CBypassEnabled(true);
-  this->accelgyro1->setSleepEnabled(false);
-
-  this->mag->initialize();
-  int16_t mx, my, mz;
-
-  this->mag->getHeading(&mx, &my, &mz);
-
-  float heading = atan2(my, mx);
-  if (heading < 0)
-    heading += 2 * M_PI;
-
-  this->valueDevice += String(heading * 180 / M_PI);
+  // Read data from each axis, 2 registers per axis
+  Wire.requestFrom(ADDRESS, 6);
+  if (6 <= Wire.available())
+  {
+    x = Wire.read() << 8; // X msb
+    x |= Wire.read();     // X lsb
+    z = Wire.read() << 8; // Z msb
+    z |= Wire.read();     // Z lsb
+    y = Wire.read() << 8; // Y msb
+    y |= Wire.read();     // Y lsb
+  }
+  this->valueDevice  = "RAW Value:";
+  this->valueDevice1 = String(x) + " ; " + String(y) + " ; " + String(z);
 
   return true;
 }
@@ -48,28 +56,18 @@ bool Controller_HMC588L_Data::init()
 {
   deInit();
   // Add your code here
-
+  Wire.begin();
+  // Put the HMC5883 IC into the correct operating mode
+  Wire.beginTransmission(ADDRESS); // open communication with HMC5883
+  Wire.write(0x02);                // select mode register
+  Wire.write(0x00);                // continuous measurement mode
+  Wire.endTransmission();
   return 1;
 }
 
 bool Controller_HMC588L_Data::deInit()
 {
   // Add your code here
-  if (this->accelgyro1 != NULL)
-  {
-    free(this->accelgyro1);
-    this->accelgyro1 = NULL;
-  }
-  if (this->mag != NULL)
-  {
-    free(this->mag);
-    this->mag = NULL;
-  }
-  if (this->pWire1 != NULL)
-  {
-    free(this->pWire1);
-    this->pWire1 = NULL;
-  }
 
   return 1;
 }
