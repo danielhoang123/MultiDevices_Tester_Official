@@ -32,6 +32,7 @@ bool Controller_LM35_Data::init()
   // Add your code here
   pinMode(A0, INPUT);
   pinMode(A1, OUTPUT);
+  analogWrite(A1, 1024);
   return 1;
 }
 

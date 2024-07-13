@@ -27,8 +27,12 @@ bool Controller_AnalogRead_Data::init()
     deInit();
     // Add your code here
     pinMode(A0, OUTPUT);
+    
     pinMode(A1, OUTPUT);
+    analogWrite(A1, 1024);
+
     pinMode(A2, OUTPUT);
+    
     pinMode(A3, INPUT);
     return 1;
 }
