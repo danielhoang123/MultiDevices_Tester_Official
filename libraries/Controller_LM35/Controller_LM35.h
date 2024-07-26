@@ -3,13 +3,23 @@
 #include "dataAdapter.h"
 
 // include your Libraries here
-#include "quoc_LM35_Kalman.h"
-// #define lm35_pin A0
-class Controller_LM35_Data: public Data_Adapter{
-  public:
-  // Add your declare here
-  quoc_lm35 lm35x;
+#include <SimpleKalmanFilter.h>
 
+class Controller_LM35_Data : public Data_Adapter
+{
+public:
+  // Add your declare here
+  // quoc_lm35 lm35x;
+  SimpleKalmanFilter *kalmanFilter;
+  const float voltageReference = 5.0;
+  // double value;
+  // double celcius;
+  // // Khai báo biến và cấu hình bộ lọc Kalman
+  // float Q = 0.001; // Noise covariance process
+  // float R = 1;     // Noise covariance measurement
+  // float P = 1;     // Estimate error covariance
+  // float K = 0;     // Kalman Gain
+  // float X = 0;     // Value
   Controller_LM35_Data();
   virtual ~Controller_LM35_Data(){};
   bool getData();

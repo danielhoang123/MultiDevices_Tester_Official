@@ -24,8 +24,10 @@ extern void AddManagerContent_Device();
 
 bool Manager_Content::getData()
 {
+
     if (millis() - this->Current_Millis > this->timeInterval) // Sau mỗi 0.25s mới cập nhập
     {
+
         this->checkIndex();
         this->Current_Millis = millis();
         uint8_t tempCurrentIndex = this->Choseen_Menu;
@@ -43,10 +45,13 @@ bool Manager_Content::getData()
         // lcd.clear();         // Xóa màn hình
         lcd.setCursor(2, 0); // Cột 2 dòng 0
         lcd.print(this->my_Devices_List.get(tempCurrentIndex)->nameDevice);
+        lcd.print("                    ");
         lcd.setCursor(2, 1); // Cột 2 dòng 0
         lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice);
+        lcd.print("                    ");
         lcd.setCursor(2, 2); // Cột 2 dòng 0
         lcd.print(this->my_Devices_List.get(tempCurrentIndex)->valueDevice1);
+        lcd.print("                    ");
         this->timeInterval = this->my_Devices_List.get(tempCurrentIndex)->timeInterval;
     }
     return 1;
@@ -71,6 +76,7 @@ bool Manager_Content::init()
     if (this->sizeMyDeviceList > 0)
     {
         this->my_Devices_List.get(tempIndex)->init();
+        this->my_Devices_List.get(tempIndex)->stopOtherReading = true;
         this->my_Devices_List.get(tempIndex)->isRun = true;
     }
     // if (listDevice[Choseen_Menu])
@@ -83,6 +89,7 @@ bool Manager_Content::init()
 bool Manager_Content::deInit()
 {
     this->checkIndex();
+
     uint8_t tempIndex = this->Choseen_Menu;
     if (this->sizeMyDeviceList > 0)
     {
@@ -90,6 +97,7 @@ bool Manager_Content::deInit()
         {
             bool tempStatus = this->my_Devices_List.get(tempIndex)->deInit();
             this->my_Devices_List.get(tempIndex)->isRun = false;
+            this->my_Devices_List.get(tempIndex)->stopOtherReading = false;
         }
     }
 
@@ -124,5 +132,24 @@ void Manager_Content::begin()
 //     this->LastStartFunction_Click = this->btnStart->_clickFunc;
 //     this->LastStartFunction_DoubleClick = this->btnStart->_doubleClickFunc;
 // }
+
+bool Manager_Content::stopBatteryReading()
+{
+
+    this->checkIndex();
+    uint8_t tempIndex = this->Choseen_Menu;
+    if (this->sizeMyDeviceList > 0)
+    {
+        // this->my_Devices_List.get(tempIndex)->init();
+        // this->my_Devices_List.get(tempIndex)->stopOtherReading = true;
+        // this->my_Devices_List.get(tempIndex)->isRun = true;
+        return this->my_Devices_List.get(tempIndex)->stopOtherReading;
+    }
+    // if (listDevice[Choseen_Menu])
+    //     listDevice[Choseen_Menu]->init();
+    // listDevice[Choseen_Menu]->isRun = true;
+
+    return 1;
+}
 
 Manager_Content manager_Content;

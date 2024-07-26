@@ -13,15 +13,23 @@ Controller_LM35_Data::Controller_LM35_Data()
 bool Controller_LM35_Data::getData()
 {
   // Add your code here
-  this->valueDevice = String(lm35x.getCalculated(), 2) + String(char(223)) + "C";
-  // this->valueDevice = "";
-  // int temp_adc_val;
-  // float temp_val;
-  // temp_adc_val = analogRead(lm35_pin); /* Read Temperature */
-  // temp_val = (temp_adc_val * 4.88);    /* Convert adc value to equivalent voltage */
-  // temp_val = (temp_val / 10);          /* LM35 gives output of 10mv/°C */
+  int rawValue = analogRead(A0);                   // Đọc giá trị analog từ cảm biến LM35
+  float voltage = (rawValue / 1023.0) * voltageReference; // Chuyển đổi giá trị analog thành điện áp
+  float temperatureC = voltage * 100.0;                   // Chuyển đổi điện áp thành nhiệt độ theo độ C
 
-  // this->valueDevice += String(temp_val, 1) + String(char(223)) + "C";
+  // Áp dụng bộ lọc Kalman
+  float filteredTemperature = this->kalmanFilter->updateEstimate(temperatureC);
+
+  // Hiển thị nhiệt độ trước và sau khi lọc
+  // Serial.print("Raw Temperature: ");
+  // Serial.print(temperatureC);
+  // Serial.print(" C, Filtered Temperature: ");
+  // Serial.print(filteredTemperature);
+  // Serial.println(" C");
+
+  // delay(1000); // Đợi 1 giây trước khi đọc giá trị tiếp theo
+
+  this->valueDevice = String(filteredTemperature);
 
   return true;
 }
@@ -30,16 +38,17 @@ bool Controller_LM35_Data::init()
 {
   deInit();
   // Add your code here
-  pinMode(A0, INPUT);
-  pinMode(A1, OUTPUT);
-  analogWrite(A1, 1024);
+  this->kalmanFilter = new SimpleKalmanFilter(2, 2, 0.01);
+
   return 1;
 }
 
 bool Controller_LM35_Data::deInit()
 {
   // Add your code here
-  pinMode(A1, INPUT);
+  if(this->kalmanFilter != NULL){
+    delete kalmanFilter;
+  }
   return 1;
 }
 

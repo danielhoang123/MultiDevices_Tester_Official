@@ -3,12 +3,15 @@
 #include "dataAdapter.h"
 
 // include your Libraries here
+#include "SharpIR.h"
 
-
-class Controller_SHARP_Data: public Data_Adapter{
-  public:
+class Controller_SHARP_Data : public Data_Adapter
+{
+public:
   // Add your declare here
-
+  int longType_distance;
+  int longType_model = 20150;
+  SharpIR *longSharpSensor;
   Controller_SHARP_Data();
   virtual ~Controller_SHARP_Data(){};
   bool getData();

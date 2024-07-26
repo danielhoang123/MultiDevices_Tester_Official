@@ -32,6 +32,7 @@ public:
   
   bool isRun = false;
 
+  bool stopOtherReading = false;
   // uint16_t hsCode;
   uint8_t i2cAddress;
 

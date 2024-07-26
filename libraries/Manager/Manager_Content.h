@@ -27,7 +27,7 @@ public:
     bool getData();
     bool init();
     bool deInit();
-
+    bool stopBatteryReading();
     void checkIndex();
     void begin();
     // void button_Init(OneButton *btnPrevious_, OneButton *btnNext_, OneButton *btnStart_);
